@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dewang Sewane — Instrumentation Engineering Student</title>
+<meta name="description" content="Portfolio of Dewang Sewane, a final-year instrumentation engineering student — DCS/PLC experience, IoT projects and internships." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<style>
+  :root {
+    --bg:            #F6F4ED;
+    --bg-soft:       #EFEBE0;
+    --surface:       #FFFFFF;
+    --line:          #E4E0D3;
+    --text:          #262620;
+    --text-muted:    #726F63;
+    --text-faint:    #A9A596;
+
+    --olive:         #55613F;
+    --olive-soft:    #E3E7D9;
+    --slate:         #3E5C76;
+    --slate-soft:    #DEE6EC;
+    --mustard:       #B8863A;
+    --mustard-soft:  #F1E5CE;
+    --teal:          #3E7A73;
+    --teal-soft:     #DCEBE7;
+
+    --font-display:  'Poppins', sans-serif;
+    --font-body:     'Inter', sans-serif;
+
+    --container:     1160px;
+    --radius:        16px;
+    --radius-sm:     10px;
+    --ease:          cubic-bezier(.22,.68,0,1);
+  }
+
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+  }
+
+  html { 
+    scroll-behavior: smooth; 
+    scroll-padding-top: 96px; 
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img { 
+    max-width: 100%; 
+    display: block; 
+  }
+
+  a { 
+    color: inherit; 
+    text-decoration: none; 
+  }
+
+  ul { 
+    list-style: none; 
+  }
+
+  button, input, textarea { 
+    font-family: inherit; 
+    color: inherit; 
+  }
+
+  .container { 
+    max-width: var(--container); 
+    margin: 0 auto; 
+    padding: 0 32px; 
+  }
+
+  .eyebrow {
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 12.5px; 
+    font-weight: 600;
+    letter-spacing: 0.12em; 
+    text-transform: uppercase;
+    color: var(--olive);
+    margin-bottom: 16px;
+  }
+
+  .eyebrow::before { 
+    content: ""; 
+    width: 20px; 
+    height: 2px; 
+    background: var(--olive); 
+    border-radius: 2px; 
+  }
+
+  h1, h2, h3 { 
+    font-family: var(--font-display); 
+    color: var(--text); 
+    letter-spacing: -0.01em; 
+  }
+
+  .wave-divider { 
+    display: flex; 
+    justify-content: center; 
+    padding: 6px 0; 
+  }
+
+  .wave-divider svg { 
+    width: 220px; 
+    height: 18px; 
+    opacity: 0.55; 
+  }
+
+  /* ===== Header Styles ===== */
+  header {
+    position: sticky; 
+    top: 0; 
+    z-index: 1000;
+    background: rgba(246, 244, 237, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  header .bar {
+    max-width: var(--container); 
+    margin: 0 auto; 
+    padding: 20px 32px;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+  }
+
+  .logo { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    font-family: var(--font-display); 
+    font-weight: 700; 
+    font-size: 16px; 
+  }
+
+  .logo .mark {
+    width: 34px; 
+    height: 34px; 
+    border-radius: 9px;
+    background: var(--olive); 
+    color: #fff;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-size: 13px; 
+    font-weight: 700;
+  }
+
+  .logo small { 
+    display: block; 
+    font-weight: 400; 
+    font-size: 10.5px; 
+    color: var(--text-muted); 
+    letter-spacing: 0.04em; 
+  }
+
+  nav.nav-desktop { 
+    display: flex; 
+    align-items: center; 
+    gap: 34px; 
+  }
+
+  nav.nav-desktop a { 
+    font-size: 14px; 
+    font-weight: 500; 
+    color: var(--text-muted); 
+    transition: color .2s var(--ease); 
+  }
+
+  nav.nav-desktop a:hover { 
+    color: var(--olive); 
+  }
+
+  .header-cta { 
+    display: flex; 
+    align-items: center; 
+    gap: 16px; 
+  }
+
+  .btn {
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px;
+    padding: 11px 22px; 
+    border-radius: 999px;
+    font-size: 13.5px; 
+    font-weight: 600;
+    border: 1px solid var(--line);
+    background: transparent;
+    cursor: pointer;
+    transition: all .25s var(--ease);
+  }
+
+  .btn:hover { 
+    border-color: var(--olive); 
+    transform: translateY(-1px); 
+  }
+
+  .btn-solid { 
+    background: var(--olive); 
+    color: #fff; 
+    border-color: var(--olive); 
+  }
+
+  .btn-solid:hover { 
+    background: #465132; 
+    box-shadow: 0 8px 20px rgba(85, 97, 63, 0.25); 
+  }
+
+  .menu-toggle {
+    display: none; 
+    flex-direction: column; 
+    gap: 5px;
+    width: 36px; 
+    height: 36px; 
+    align-items: center; 
+    justify-content: center;
+    border-radius: 50%; 
+    border: 1px solid var(--line); 
+    background: transparent; 
+    cursor: pointer;
+  }
+
+  .menu-toggle span { 
+    width: 16px; 
+    height: 2px; 
+    background: var(--text); 
+    border-radius: 2px; 
+    transition: transform .3s var(--ease), opacity .3s var(--ease); 
+  }
+
+  .menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.active span:nth-child(2) { opacity: 0; }
+  .menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .nav-mobile {
+    display: none; 
+    position: fixed; 
+    top: 74px; 
+    left: 16px; 
+    right: 16px;
+    background: var(--surface); 
+    border: 1px solid var(--line); 
+    border-radius: var(--radius);
+    padding: 10px; 
+    z-index: 999; 
+    flex-direction: column; 
+    gap: 2px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    transform: translateY(-12px); 
+    opacity: 0; 
+    pointer-events: none;
+    transition: all .3s var(--ease);
+  }
+
+  .nav-mobile.active { 
+    transform: translateY(0); 
+    opacity: 1; 
+    pointer-events: auto; 
+  }
+
+  .nav-mobile a { 
+    padding: 14px 16px; 
+    border-radius: var(--radius-sm); 
+    font-size: 15px; 
+    color: var(--text-muted); 
+  }
+
+  .nav-mobile a:hover { 
+    background: var(--bg-soft); 
+    color: var(--text); 
+  }
+
+  .nav-mobile .btn { 
+    margin: 8px 8px 4px; 
+    justify-content: center; 
+  }
+
+  section { 
+    padding: 100px 0; 
+  }
+
+  .section-head { 
+    max-width: 560px; 
+    margin-bottom: 52px; 
+  }
+
+  .section-head h2 { 
+    font-size: clamp(24px, 3vw, 32px); 
+    font-weight: 600; 
+  }
+
+  .section-head p { 
+    color: var(--text-muted); 
+    margin-top: 12px; 
+    font-size: 15px; 
+  }
+
+  /* ===== Hero Section ===== */
+  #hero { 
+    padding-top: 76px; 
+    padding-bottom: 60px; 
+  }
+
+  .hero-grid { 
+    display: grid; 
+    grid-template-columns: 1.05fr 0.95fr; 
+    gap: 56px; 
+    align-items: center; 
+  }
+
+  .hero-copy h1 { 
+    font-size: clamp(32px, 4.4vw, 50px); 
+    font-weight: 600; 
+    line-height: 1.16; 
+    margin-bottom: 20px; 
+  }
+
+  .hero-copy .lede { 
+    color: var(--text-muted); 
+    font-size: 15.5px; 
+    max-width: 440px; 
+    margin-bottom: 32px; 
+  }
+
+  .hero-actions { 
+    display: flex; 
+    gap: 16px; 
+    flex-wrap: wrap; 
+  }
+
+  .hero-visual { 
+    position: relative; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+  }
+
+  .panel {
+    position: relative; 
+    width: 100%; 
+    max-width: 400px; 
+    aspect-ratio: 1/1;
+    background: var(--surface); 
+    border: 1px solid var(--line); 
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    box-shadow: 0 30px 60px rgba(38, 38, 32, 0.06);
+  }
+
+  .panel img.hero-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .panel-tag {
+    position: absolute; 
+    bottom: 16px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9); 
+    backdrop-filter: blur(8px); 
+    border: 1px solid var(--line);
+    padding: 9px 18px; 
+    border-radius: 999px;
+    font-size: 12px; 
+    font-weight: 600; 
+    color: var(--olive);
+    white-space: nowrap; 
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+  }
+
+  .dot-cluster { 
+    position: absolute; 
+    top: -10px; 
+    right: -16px; 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 7px; 
+    opacity: 0.5; 
+  }
+
+  .dot-cluster span { 
+    width: 5px; 
+    height: 5px; 
+    border-radius: 50%; 
+    background: var(--text-faint); 
+  }
+
+  /* ===== Stats Section ===== */
+  #stats { 
+    padding: 56px 0; 
+    border-top: 1px solid var(--line); 
+    border-bottom: 1px solid var(--line); 
+    background: var(--bg-soft); 
+  }
+
+  .stats-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 24px; 
+    text-align: center; 
+  }
+
+  .stat h3 { 
+    font-size: clamp(26px, 3vw, 36px); 
+    font-weight: 700; 
+    color: var(--olive); 
+  }
+
+  .stat p { 
+    font-size: 13px; 
+    color: var(--text-muted); 
+    margin-top: 6px; 
+  }
+
+  /* ===== Skills Section ===== */
+  .skills-grid { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 22px; 
+  }
+
+  .skill-card {
+    background: var(--surface); 
+    border: 1px solid var(--line); 
+    border-radius: var(--radius);
+    padding: 30px 24px; 
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+  }
+
+  .skill-card:hover { 
+    transform: translateY(-6px); 
+    box-shadow: 0 20px 40px rgba(38, 38, 32, 0.07); 
+  }
+
+  .skill-icon {
+    width: 46px; 
+    height: 46px; 
+    border-radius: 50%;
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-size: 17px; 
+    margin-bottom: 20px;
+  }
+
+  .skill-card h3 { 
+    font-size: 16px; 
+    font-weight: 600; 
+    margin-bottom: 8px; 
+  }
+
+  .skill-card p { 
+    font-size: 13.5px; 
+    color: var(--text-muted); 
+  }
+
+  /* ===== Projects & Experience Cards Grid ===== */
+  .proj-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+    gap: 26px; 
+  }
+
+  .proj-card {
+    background: var(--surface); 
+    border: 1px solid var(--line); 
+    border-radius: var(--radius);
+    overflow: hidden; 
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    display: flex; 
+    flex-direction: column;
+  }
+
+  .proj-card:hover { 
+    transform: translateY(-6px); 
+    box-shadow: 0 24px 44px rgba(38, 38, 32, 0.08); 
+  }
+
+  .proj-thumb {
+    height: 200px; 
+    width: 100%; 
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+
+  .proj-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s var(--ease);
+  }
+
+  .proj-card:hover .proj-thumb img { 
+    transform: scale(1.04); 
+  }
+
+  .proj-body { 
+    padding: 22px 22px 26px; 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+  }
+
+  .proj-body .tag { 
+    font-size: 11.5px; 
+    font-weight: 600; 
+    letter-spacing: 0.04em; 
+    text-transform: uppercase; 
+    color: var(--text-faint); 
+    margin-bottom: 8px; 
+    display: block; 
+  }
+
+  .proj-body h3 { 
+    font-size: 16.5px; 
+    font-weight: 600; 
+    margin-bottom: 8px; 
+  }
+
+  .proj-body p { 
+    font-size: 13.5px; 
+    color: var(--text-muted); 
+    margin-bottom: 16px; 
+  }
+
+  .proj-link { 
+    font-size: 13px; 
+    font-weight: 600; 
+    color: var(--olive); 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 7px; 
+    margin-top: auto; 
+  }
+
+  .proj-link i { 
+    transition: transform .25s var(--ease); 
+    font-size: 11px; 
+  }
+
+  .proj-card:hover .proj-link i { 
+    transform: translateX(4px); 
+  }
+
+  /* ===== Future Work / Career Vision ===== */
+  #future-vision { 
+    background: var(--bg-soft); 
+    border-top: 1px solid var(--line); 
+    border-bottom: 1px solid var(--line); 
+  }
+
+  .vision-grid { 
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 24px; 
+  }
+
+  .vision-card {
+    background: var(--surface); 
+    border: 1px solid var(--line); 
+    border-radius: var(--radius);
+    padding: 32px 24px; 
+    position: relative;
+  }
+
+  .vision-card h3 { 
+    font-size: 17px; 
+    margin-bottom: 12px; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    color: var(--olive); 
+  }
+
+  .vision-card p { 
+    font-size: 14px; 
+    color: var(--text-muted); 
+  }
+
+  /* ===== Education / Certifications timeline ===== */
+  .timeline { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0; 
+  }
+
+  .tl-item {
+    display: grid; 
+    grid-template-columns: 70px 1fr; 
+    gap: 22px;
+    padding: 26px 0; 
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tl-item:last-child { 
+    border-bottom: none; 
+  }
+
+  .tl-num { 
+    font-family: var(--font-display); 
+    font-weight: 700; 
+    font-size: 20px; 
+    color: var(--text-faint); 
+  }
+
+  .tl-content { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: flex-start; 
+    flex-wrap: wrap; 
+    gap: 6px; 
+  }
+
+  .tl-content h3 { 
+    font-size: 16px; 
+    font-weight: 600; 
+  }
+
+  .tl-content .org { 
+    font-size: 13.5px; 
+    color: var(--olive); 
+    font-weight: 500; 
+    margin-top: 3px; 
+  }
+
+  .tl-content .desc { 
+    font-size: 13.5px; 
+    color: var(--text-muted); 
+    margin-top: 6px; 
+    max-width: 520px; 
+  }
+
+  .tl-period { 
+    font-size: 12.5px; 
+    color: var(--text-faint); 
+    font-weight: 600; 
+    white-space: nowrap; 
+  }
+
+  /* ===== Refined Sleek Contact Section ===== */
+  #contact {
+    background: var(--bg-soft);
+    border-top: 1px solid var(--line);
+  }
+
+  .contact-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .contact-card-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+  }
+
+  .contact-card-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(38, 38, 32, 0.08);
+    border-color: var(--olive);
+  }
+
+  .contact-icon-box {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    background: var(--olive-soft);
+    color: var(--olive);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .contact-card-content {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .card-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    margin-bottom: 4px;
+  }
+
+  .card-value {
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ===== Footer Section ===== */
+  footer { 
+    padding: 40px 0; 
+  }
+
+  .footer-inner {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+    gap: 16px;
+    padding-top: 26px; 
+    border-top: 1px solid var(--line);
+  }
+
+  .footer-meta { 
+    font-size: 12.5px; 
+    color: var(--text-faint); 
+  }
+
+  .footer-socials { 
+    display: flex; 
+    gap: 10px; 
+  }
+
+  .footer-socials a {
+    width: 34px; 
+    height: 34px; 
+    border-radius: 50%; 
+    border: 1px solid var(--line);
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 13px; 
+    color: var(--text-muted);
+    transition: all .2s var(--ease);
+  }
+
+  .footer-socials a:hover { 
+    background: var(--olive); 
+    color: #fff; 
+    border-color: var(--olive); 
+  }
+
+  .reveal { 
+    opacity: 0; 
+    transform: translateY(20px); 
+    transition: opacity .6s var(--ease), transform .6s var(--ease); 
+  }
+
+  .reveal.in { 
+    opacity: 1; 
+    transform: translateY(0); 
+  }
+
+  /* ===== Responsive Breakpoints ===== */
+  @media (max-width: 1024px) {
+    .vision-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    nav.nav-desktop { display: none; }
+    .menu-toggle { display: flex; }
+    .nav-mobile { display: flex; }
+
+    section { padding: 72px 0; }
+    #hero { padding-top: 40px; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { order: -1; margin-bottom: 10px; }
+    .panel { max-width: 280px; }
+
+    .stats-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .tl-content { flex-direction: column; }
+  }
+
+  @media (max-width: 600px) {
+    .container { padding: 0 18px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .hero-copy h1 { font-size: 30px; }
+    .footer-inner { flex-direction: column; align-items: flex-start; }
+    section { padding: 56px 0; }
+    .tl-item { grid-template-columns: 40px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ==================== HEADER ==================== -->
+  <header id="siteHeader">
+    <div class="bar">
+      <a href="#hero" class="logo">
+        <span class="mark">DS</span>
+        <span>Dewang Sewane<small>Instrumentation Engineering</small></span>
+      </a>
+
+      <nav class="nav-desktop">
+        <a href="#hero">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#future-vision">Future Vision</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="header-cta">
+        <a href="https://drive.google.com/file/d/189BLiar1aE4Ge-wkzuLHgSQEZVaAMm1S/view?usp=sharing" class="btn" id="resumeBtn" download="Dewang_Sewane_Resume.pdf"><i class="fa-solid fa-arrow-down"></i> Resume</a>
+        <a href="#contact" class="btn btn-solid">Let's talk</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <nav class="nav-mobile" id="mobileNav">
+      <a href="#hero">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#future-vision">Future Vision</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+      <a href="resume.pdf" class="btn btn-solid" download="Dewang_Sewane_Resume.pdf"><i class="fa-solid fa-arrow-down"></i> Download resume</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section id="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">Instrumentation Engineering · Final Year</div>
+          <h1>I build control systems that sense, monitor and automate the physical world.</h1>
+          <p class="lede">Final-year instrumentation engineering student with hands-on experience configuring a Siemens PCS7 DCS and programming Siemens S7-1200 PLCs (TIA Portal). I've also built IoT-based wireless sensor networks with live remote dashboards. Looking to bring this control-systems and IoT background to a building automation or HVAC controls role.</p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-solid"><i class="fa-solid fa-diagram-project"></i> View my projects</a>
+            <a href="#contact" class="btn">Let's work together <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+    <div class="panel">
+
+        <img class="hero-photo" src="./dd111.png" alt="D.D. Sewane">
+
+        <div class="panel-tag">D.D. Sewane</div>
+
+    </div>
+</div>
+    </section>
+
+    <div class="wave-divider">
+      <svg viewBox="0 0 200 20"><path d="M0 10 Q25 0 50 10 T100 10 T150 10 T200 10" stroke="#A9A596" stroke-width="1.5" fill="none"/></svg>
+    </div>
+
+    <!-- ==================== STATS SECTION ==================== -->
+    <section id="stats">
+      <div class="container stats-grid">
+        <div class="stat reveal">
+          <h3>2</h3>
+          <p>Projects built</p>
+        </div>
+        <div class="stat reveal">
+          <h3>2</h3>
+          <p>Internships &amp; trainings</p>
+        </div>
+        <div class="stat reveal">
+          <h3>7.02</h3>
+          <p>CGPA</p>
+        </div>
+        <div class="stat reveal">
+          <h3>4</h3>
+          <p>Leadership roles</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SKILLS SECTION ==================== -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">What I know</div>
+          <h2>Core skills</h2>
+          <p>Coursework, training and project work across DCS/PLC control and IoT-based monitoring.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card reveal">
+            <div class="skill-icon" style="background:var(--olive-soft); color:var(--olive);"><i class="fa-solid fa-server"></i></div>
+            <h3>DCS Configuration</h3>
+            <p>Hands-on with Siemens PCS7 DCS, configuring control logic using CFC (Continuous Function Chart) in SIMATIC Manager.</p>
+          </div>
+          <div class="skill-card reveal">
+            <div class="skill-icon" style="background:var(--slate-soft); color:var(--slate);"><i class="fa-solid fa-microchip"></i></div>
+            <h3>PLC Programming</h3>
+            <p>Ladder logic programming on Siemens S7-1200 via TIA Portal — core controller skills used in HVAC and facility automation.</p>
+          </div>
+          <div class="skill-card reveal">
+            <div class="skill-icon" style="background:var(--mustard-soft); color:var(--mustard);"><i class="fa-solid fa-satellite-dish"></i></div>
+            <h3>Sensors &amp; Transducers</h3>
+            <p>Interfacing thermocouples, ultrasonic and industrial sensors; process instrumentation and signal conditioning.</p>
+          </div>
+          <div class="skill-card reveal">
+            <div class="skill-icon" style="background:var(--teal-soft); color:var(--teal);"><i class="fa-solid fa-wifi"></i></div>
+            <h3>IoT &amp; Remote Monitoring</h3>
+            <p>Wireless sensor networks with ESP32/ESP-NOW, live dashboards on Blynk, and remote data visualization.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== EXPERIENCE SECTION ==================== -->
+    <section id="experience">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Where I've worked</div>
+          <h2>Internships &amp; industrial training</h2>
+          <p>Hands-on time with real DCS/PLC hardware and panel-building.</p>
+        </div>
+
+        <div class="proj-grid">
+          <article class="proj-card reveal">
+            <div class="proj-thumb">
+              <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80" alt="Siemens PCS7 DCS trainee kit">
+            </div>
+            <div class="proj-body">
+              <div>
+                <span class="tag">Jul 2026 – Aug 2026</span>
+                <h3>Industrial Automation Trainee</h3>
+                <p style="color:var(--olive); font-weight:500; font-size:13.5px; margin-bottom:8px;">Siemens V.R. Jamdar CoE, VNIT Nagpur</p>
+                <p>Configured a PCS7 DCS trainee kit using SIMATIC Manager and CFC logic; programmed PLC ladder logic on a Siemens S7-1200 via TIA Portal; learned to configure industrial sensors.</p>
+              </div>
+              <a href="https://drive.google.com/file/d/1etmlMfmc0IqTiIpjuL-miMDcFsBuXGWj/view?usp=sharing" target="_blank" rel="noopener" class="proj-link" style="margin-top: 16px;">
+                <i class="fa-solid fa-certificate"></i> View Certificate <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="proj-card reveal">
+            <div class="proj-thumb">
+              <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="PLC and VFD panel assembly">
+            </div>
+            <div class="proj-body">
+              <div>
+                <span class="tag">Industrial Training · 5 Days</span>
+                <h3>PLC &amp; VFD Panel Assembly</h3>
+                <p style="color:var(--olive); font-weight:500; font-size:13.5px; margin-bottom:8px;">Singh Electrical Pvt Ltd</p>
+                <p>Observed and assisted in assembling PLC and VFD panels — wiring, layout and reading circuit diagrams — under guidance of senior technicians.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROJECTS SECTION ==================== -->
+    <section id="projects">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Selected work</div>
+          <h2>Projects</h2>
+          <p>Two projects combining sensor hardware with wireless, remote-monitoring dashboards.</p>
+        </div>
+
+        <div class="proj-grid">
+          <article class="proj-card reveal">
+            <div class="proj-thumb">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="Wireless temperature transmitter setup">
+            </div>
+            <div class="proj-body">
+              <div>
+                <span class="tag">Minor Project · Jan 2026 – May 2026</span>
+                <h3>Wireless Temperature Transmitter with IoT-Based Remote Monitoring</h3>
+                <p>Designed a wireless thermocouple-based temperature transmitter using ESP-NOW communication between ESP32 units, with a Blynk IoT dashboard for real-time remote monitoring and a 16×2 I2C LCD display — replicating the remote-monitoring function at the core of a BMS.</p>
+              </div>
+              <a href="#" class="proj-link">View details <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+
+          <article class="proj-card reveal">
+            <div class="proj-thumb">
+              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" alt="Non-contact liquid level monitoring system">
+            </div>
+            <div class="proj-body">
+              <div>
+                <span class="tag">Mini Project · Mar 2025 – Apr 2025</span>
+                <h3>Non-Contact Liquid Level Monitoring System</h3>
+                <p>Built a non-contact water tank level monitoring system using an HC-SR04 ultrasonic sensor and Arduino Uno for real-time facility water-level tracking — automating a manual inspection task comparable to utility monitoring in building automation systems.</p>
+              </div>
+              <a href="#" class="proj-link">View details <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FUTURE WORK SECTION ==================== -->
+    <section id="future-vision">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Career roadmap</div>
+          <h2>Future work &amp; career vision</h2>
+          <p>Where I aim to grow and the impact I want to create professionally in the coming years.</p>
+        </div>
+
+        <div class="vision-grid">
+          <div class="vision-card reveal">
+            <h3><i class="fa-solid fa-industry"></i> Industrial Automation &amp; DCS</h3>
+            <p>Deepen my expertise in large-scale Distributed Control Systems (DCS) and safety-instrumented systems (SIS) for core process plants, power generation stations, and heavy manufacturing units.</p>
+          </div>
+          <div class="vision-card reveal">
+            <h3><i class="fa-solid fa-network-wired"></i> Industrial IoT &amp; SCADA Integration</h3>
+            <p>Bridge traditional operational technology (OT) with modern IT systems by deploying robust SCADA platforms and cloud-connected edge IoT sensors to optimize predictive plant maintenance.</p>
+          </div>
+          <div class="vision-card reveal">
+            <h3><i class="fa-solid fa-seedling"></i> Energy Efficiency &amp; Smart Infrastructure</h3>
+            <p>Contribute to smart building management systems (BMS) and renewable energy integration projects to minimize energy wastage and build sustainable, automated industrial environments.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== EDUCATION SECTION ==================== -->
+    <section id="education">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">Background</div>
+          <h2>Education</h2>
+        </div>
+
+        <div class="timeline">
+          <div class="tl-item reveal">
+            <div class="tl-num">01</div>
+            <div class="tl-content">
+              <div>
+                <h3>B.Tech, Instrumentation Engineering</h3>
+                <div class="org">Government College of Engineering, Amravati</div>
+                <p class="desc">CGPA 7.02. Relevant coursework: Sensor and Transducer (IN1403), Process Control (IN1601), Industrial Automation (IN1502).</p>
+              </div>
+              <div class="tl-period">2023 — 2027</div>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-num">02</div>
+            <div class="tl-content">
+              <div>
+                <h3>HSC</h3>
+                <div class="org">Dharampeth M.P. Deo Memorial Science College, Nagpur</div>
+                <p class="desc">Scored 64.33%.</p>
+              </div>
+              <div class="tl-period">2023</div>
+            </div>
+          </div>
+
+          <div class="tl-item reveal">
+            <div class="tl-num">03</div>
+            <div class="tl-content">
+              <div>
+                <h3>SSC</h3>
+                <div class="org">Rai English High School, Nagpur</div>
+                <p class="desc">Scored 80.80%.</p>
+              </div>
+              <div class="tl-period">2021</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section-head reveal" style="margin-top:56px; margin-bottom:24px;">
+          <div class="eyebrow">Beyond academics</div>
+          <h2>Leadership &amp; extracurriculars</h2>
+        </div>
+        <div class="skills-grid" style="grid-template-columns: repeat(4, 1fr);">
+          <div class="skill-card reveal" style="padding:22px 20px;">
+            <div class="skill-icon" style="background:var(--olive-soft); color:var(--olive); width:38px; height:38px; font-size:14px;"><i class="fa-solid fa-hand-holding-heart"></i></div>
+            <h3 style="font-size:14.5px;">NSS Member</h3>
+            <p style="font-size:13px;">National Service Scheme</p>
+          </div>
+          <div class="skill-card reveal" style="padding:22px 20px;">
+            <div class="skill-icon" style="background:var(--slate-soft); color:var(--slate); width:38px; height:38px; font-size:14px;"><i class="fa-solid fa-hand-fist"></i></div>
+            <h3 style="font-size:14.5px;">Handball Captain</h3>
+            <p style="font-size:13px;">Instrumentation Department</p>
+          </div>
+          <div class="skill-card reveal" style="padding:22px 20px;">
+            <div class="skill-icon" style="background:var(--mustard-soft); color:var(--mustard); width:38px; height:38px; font-size:14px;"><i class="fa-solid fa-newspaper"></i></div>
+            <h3 style="font-size:14.5px;">Newsletter Coordinator</h3>
+            <p style="font-size:13px;">Departmental Newsletter Committee</p>
+          </div>
+          <div class="skill-card reveal" style="padding:22px 20px;">
+            <div class="skill-icon" style="background:var(--teal-soft); color:var(--teal); width:38px; height:38px; font-size:14px;"><i class="fa-solid fa-people-group"></i></div>
+            <h3 style="font-size:14.5px;">Class Representative</h3>
+            <p style="font-size:13px;">Link for 30+ students &amp; faculty</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT SECTION (REFINED & SLEEK) ==================== -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-head reveal" style="max-width: 600px; margin: 0 auto 48px auto; text-align: center;">
+          <div class="eyebrow" style="justify-content: center;">Get in touch</div>
+          <h2>Let's connect &amp; build the future together</h2>
+          <p>Open to entry-level roles, internships, and conversations around industrial automation and control systems.</p>
+        </div>
+
+        <div class="contact-cards-grid reveal">
+          <a href="mailto:dewangsewane@gmail.com" class="contact-card-item">
+            <div class="contact-icon-box"><i class="fa-solid fa-envelope"></i></div>
+            <div class="contact-card-content">
+              <span class="card-label">Email Me</span>
+              <span class="card-value">dewangsewane@gmail.com</span>
+            </div>
+          </a>
+
+          <a href="tel:+919325539896" class="contact-card-item">
+            <div class="contact-icon-box"><i class="fa-solid fa-phone"></i></div>
+            <div class="contact-card-content">
+              <span class="card-label">Call / WhatsApp</span>
+              <span class="card-value">+91-9325539896</span>
+            </div>
+          </a>
+
+          <a href="https://www.linkedin.com/in/dewang-sewane" target="_blank" rel="noopener" class="contact-card-item">
+            <div class="contact-icon-box"><i class="fa-brands fa-linkedin-in"></i></div>
+            <div class="contact-card-content">
+              <span class="card-label">LinkedIn Profile</span>
+              <span class="card-value">dewang-sewane</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#hero" class="logo"><span class="mark">DS</span> Dewang Sewane</a>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/dewang-sewane" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="mailto:dewangsewane@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <div class="footer-meta">© 2026 Dewang Sewane. Built with care.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    menuToggle.addEventListener('click', () => {
+      const isActive = menuToggle.classList.toggle('active');
+      mobileNav.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', isActive);
+    });
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        mobileNav.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
