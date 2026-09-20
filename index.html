@@ -328,10 +328,10 @@
   }
 
   .hero-copy h1 { 
-    font-size: clamp(32px, 4.4vw, 50px); 
+    font-size: clamp(72px, 4.4vw, 50px); 
     font-weight: 600; 
     line-height: 1.16; 
-    margin-bottom: 20px; 
+    margin-bottom: 10px; 
   }
 
   .hero-copy .lede { 
@@ -407,33 +407,6 @@
     height: 5px; 
     border-radius: 50%; 
     background: var(--text-faint); 
-  }
-
-  /* ===== Stats Section ===== */
-  #stats { 
-    padding: 56px 0; 
-    border-top: 1px solid var(--line); 
-    border-bottom: 1px solid var(--line); 
-    background: var(--bg-soft); 
-  }
-
-  .stats-grid { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 24px; 
-    text-align: center; 
-  }
-
-  .stat h3 { 
-    font-size: clamp(26px, 3vw, 36px); 
-    font-weight: 700; 
-    color: var(--olive); 
-  }
-
-  .stat p { 
-    font-size: 13px; 
-    color: var(--text-muted); 
-    margin-top: 6px; 
   }
 
   /* ===== Skills Section ===== */
@@ -801,7 +774,6 @@
     .hero-visual { order: -1; margin-bottom: 10px; }
     .panel { max-width: 280px; }
 
-    .stats-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
     .skills-grid { grid-template-columns: 1fr 1fr; }
     .tl-content { flex-direction: column; }
   }
@@ -809,7 +781,6 @@
   @media (max-width: 600px) {
     .container { padding: 0 18px; }
     .skills-grid { grid-template-columns: 1fr; }
-    .stats-grid { grid-template-columns: 1fr 1fr; }
     .hero-copy h1 { font-size: 30px; }
     .footer-inner { flex-direction: column; align-items: flex-start; }
     section { padding: 56px 0; }
@@ -829,16 +800,15 @@
 
       <nav class="nav-desktop">
         <a href="#hero">About</a>
-        <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#future-vision">Future Vision</a>
         <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
       </nav>
 
       <div class="header-cta">
-        <a href="https://drive.google.com/file/d/189BLiar1aE4Ge-wkzuLHgSQEZVaAMm1S/view?usp=sharing" class="btn" id="resumeBtn" download="Dewang_Sewane_Resume.pdf"><i class="fa-solid fa-arrow-down"></i> Resume</a>
+        <a href="https://drive.google.com/file/d/1iIPiMkae7lmbDpLdxbOpo4QBvol2N3zt/view?usp=sharing" class="btn" id="resumeBtn" download="Dewang_Sewane_Resume.pdf"><i class="fa-solid fa-arrow-down"></i> Resume</a>
         <a href="#contact" class="btn btn-solid">Let's talk</a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -848,12 +818,12 @@
 
     <nav class="nav-mobile" id="mobileNav">
       <a href="#hero">About</a>
-      <a href="#skills">Skills</a>
       <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
       <a href="#future-vision">Future Vision</a>
       <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
+      
       <a href="resume.pdf" class="btn btn-solid" download="Dewang_Sewane_Resume.pdf"><i class="fa-solid fa-arrow-down"></i> Download resume</a>
     </nav>
   </header>
@@ -864,9 +834,10 @@
     <section id="hero">
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <div class="eyebrow">Instrumentation Engineering · Final Year</div>
-          <h1>I build control systems that sense, monitor and automate the physical world.</h1>
-          <p class="lede">Final-year instrumentation engineering student with hands-on experience configuring a Siemens PCS7 DCS and programming Siemens S7-1200 PLCs (TIA Portal). I've also built IoT-based wireless sensor networks with live remote dashboards. Looking to bring this control-systems and IoT background to a building automation or HVAC controls role.</p>
+         
+          <h1>Hello</h1>
+            <div class="eyebrow">I'm Dewang Sewane </div>
+          <p class="lede">Final-year instrumentation engineering student with hands-on experience configuring a Siemens PCS7 DCS and programming Siemens S7-1200 PLCs (TIA Portal). I've also built IoT-based wireless sensor networks with live remote dashboards. Looking to bring this control-systems and IoT background to a building automation or Industrial automation  role.</p>
           <div class="hero-actions">
             <a href="#projects" class="btn btn-solid"><i class="fa-solid fa-diagram-project"></i> View my projects</a>
             <a href="#contact" class="btn">Let's work together <i class="fa-solid fa-arrow-right"></i></a>
@@ -888,65 +859,13 @@
       <svg viewBox="0 0 200 20"><path d="M0 10 Q25 0 50 10 T100 10 T150 10 T200 10" stroke="#A9A596" stroke-width="1.5" fill="none"/></svg>
     </div>
 
-    <!-- ==================== STATS SECTION ==================== -->
-    <section id="stats">
-      <div class="container stats-grid">
-        <div class="stat reveal">
-          <h3>2</h3>
-          <p>Projects built</p>
-        </div>
-        <div class="stat reveal">
-          <h3>2</h3>
-          <p>Internships &amp; trainings</p>
-        </div>
-        <div class="stat reveal">
-          <h3>7.02</h3>
-          <p>CGPA</p>
-        </div>
-        <div class="stat reveal">
-          <h3>4</h3>
-          <p>Leadership roles</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== SKILLS SECTION ==================== -->
-    <section id="skills">
-      <div class="container">
-        <div class="section-head reveal">
-          <div class="eyebrow">What I know</div>
-          <h2>Core skills</h2>
-          <p>Coursework, training and project work across DCS/PLC control and IoT-based monitoring.</p>
-        </div>
-
-        <div class="skills-grid">
-         
-          <div class="skill-card reveal">
-            <div class="skill-icon" style="background:var(--slate-soft); color:var(--slate);"><i class="fa-solid fa-microchip"></i></div>
-            <h3>PLC Programming</h3>
-            <p>Ladder logic programming on Siemens S7-1200 via TIA Portal — core controller skills used in HVAC and facility automation.</p>
-          </div>
-          <div class="skill-card reveal">
-            <div class="skill-icon" style="background:var(--mustard-soft); color:var(--mustard);"><i class="fa-solid fa-satellite-dish"></i></div>
-            <h3>Sensors &amp; Transducers</h3>
-            <p>Interfacing thermocouples, ultrasonic and industrial sensors; process instrumentation and signal conditioning.</p>
-          </div>
-          <div class="skill-card reveal">
-            <div class="skill-icon" style="background:var(--teal-soft); color:var(--teal);"><i class="fa-solid fa-wifi"></i></div>
-            <h3>IoT &amp; Remote Monitoring</h3>
-            <p>Wireless sensor networks with ESP32/ESP-NOW, live dashboards on Blynk, and remote data visualization.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- ==================== EXPERIENCE SECTION ==================== -->
     <section id="experience">
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow">Where I've worked</div>
           <h2>Internships &amp; industrial training</h2>
-          <p>Hands-on time with real DCS/PLC hardware and panel-building.</p>
+          <p>Hands-on time with real DCS/PLC hardware .</p>
         </div>
 
         <div class="proj-grid">
@@ -980,6 +899,40 @@
               </div>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SKILLS SECTION ==================== -->
+    <section id="skills">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">What I know</div>
+          <h2> Skills</h2>
+          <p>Coursework, internship and project work across DCS/PLC control and IoT-based monitoring.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card reveal">
+            <div class="skill-icon" style="background:var(--olive-soft); color:var(--olive);"><i class="fa-solid fa-server"></i></div>
+            <h3>DCS Configuration</h3>
+            <p>Hands-on with Siemens PCS7 DCS, configuring control logic using CFC (Continuous Function Chart) in SIMATIC Manager.</p>
+          </div>
+          <div class="skill-card reveal">
+            <div class="skill-icon" style="background:var(--slate-soft); color:var(--slate);"><i class="fa-solid fa-microchip"></i></div>
+            <h3>PLC Programming</h3>
+            <p>Hands-on ladder logic programming in TIA Portal on Siemens S7-1200 and S7-1500 — the building blocks (bit logic, timers, counters) behind any PLC-controlled process.</p>
+          </div>
+          <div class="skill-card reveal">
+            <div class="skill-icon" style="background:var(--mustard-soft); color:var(--mustard);"><i class="fa-solid fa-satellite-dish"></i></div>
+            <h3>Sensors &amp; Transducers</h3>
+            <p>Interfacing thermocouples, ultrasonic and industrial sensors; process instrumentation and signal conditioning.</p>
+          </div>
+          <div class="skill-card reveal">
+            <div class="skill-icon" style="background:var(--teal-soft); color:var(--teal);"><i class="fa-solid fa-wifi"></i></div>
+            <h3>IoT &amp; Remote Monitoring</h3>
+            <p>Wireless sensor networks with ESP32/ESP-NOW, live dashboards on Blynk, and remote data visualization.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -1031,21 +984,20 @@
         <div class="section-head reveal">
           <div class="eyebrow">Career roadmap</div>
           <h2>Future work &amp; career vision</h2>
-          <p>Where I aim to grow and the impact I want to create professionally in the coming years.</p>
-        </div>
+          </div>
 
         <div class="vision-grid">
           <div class="vision-card reveal">
-            <h3><i class="fa-solid fa-industry"></i> Industrial Automation &amp; DCS</h3>
-            <p>Deepen my expertise in large-scale Distributed Control Systems (DCS) and safety-instrumented systems (SIS) for core process plants, power generation stations, and heavy manufacturing units.</p>
+            <h3><i class="far fa-building"></i>Building Automation  &amp; Smart Infrastructure </h3>
+            <p>Contribute to smart building management systems (BMS) and renewable energy integration projects to minimize energy wastage and build sustainable, automated industrial environments..</p>
           </div>
           <div class="vision-card reveal">
-            <h3><i class="fa-solid fa-network-wired"></i> Industrial IoT &amp; SCADA Integration</h3>
+            <h3><i class="fa-solid fa-network-wired"></i> Industrial Automation &amp; DCS</h3>
             <p>Bridge traditional operational technology (OT) with modern IT systems by deploying robust SCADA platforms and cloud-connected edge IoT sensors to optimize predictive plant maintenance.</p>
           </div>
           <div class="vision-card reveal">
-            <h3><i class="fa-solid fa-seedling"></i> Energy Efficiency &amp; Smart Infrastructure</h3>
-            <p>Contribute to smart building management systems (BMS) and renewable energy integration projects to minimize energy wastage and build sustainable, automated industrial environments.</p>
+            <h3><i class="fa-solid fa-industry"></i>Industrial IoT &amp; SCADA Integration </h3>
+            <p>Deepen my expertise in large-scale Distributed Control Systems (DCS) and safety-instrumented systems (SIS) for core process plants, power generation stations, and heavy manufacturing units.</p>
           </div>
         </div>
       </div>
@@ -1066,7 +1018,7 @@
               <div>
                 <h3>B.Tech, Instrumentation Engineering</h3>
                 <div class="org">Government College of Engineering, Amravati</div>
-                <p class="desc">CGPA 7.02. Relevant coursework: Sensor and Transducer (IN1403), Process Control (IN1601), Industrial Automation (IN1502).</p>
+                <p class="desc"> Relevant coursework: Sensor and Transducer (IN1403), Process Control (IN1601), Industrial Automation (IN1502).</p>
               </div>
               <div class="tl-period">2023 — 2027</div>
             </div>
@@ -1076,9 +1028,8 @@
             <div class="tl-num">02</div>
             <div class="tl-content">
               <div>
-                <h3>HSC</h3>
+                <h3> Higher Secondary Certificate (Class 12)</h3>
                 <div class="org">Dharampeth M.P. Deo Memorial Science College, Nagpur</div>
-                <p class="desc">Scored 64.33%.</p>
               </div>
               <div class="tl-period">2023</div>
             </div>
@@ -1088,9 +1039,9 @@
             <div class="tl-num">03</div>
             <div class="tl-content">
               <div>
-                <h3>SSC</h3>
+                <h3>Secondary School Certificate (class 10)</h3>
                 <div class="org">Rai English High School, Nagpur</div>
-                <p class="desc">Scored 80.80%.</p>
+                
               </div>
               <div class="tl-period">2021</div>
             </div>
@@ -1101,7 +1052,7 @@
           <div class="eyebrow">Beyond academics</div>
           <h2>Leadership &amp; extracurriculars</h2>
         </div>
-        <div class="skills-grid" style="grid-template-columns: repeat(4, 1fr);">
+        <div class="skills-grid">
           <div class="skill-card reveal" style="padding:22px 20px;">
             <div class="skill-icon" style="background:var(--olive-soft); color:var(--olive); width:38px; height:38px; font-size:14px;"><i class="fa-solid fa-hand-holding-heart"></i></div>
             <h3 style="font-size:14.5px;">NSS Member</h3>
