@@ -3,8 +3,21 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Dewang Sewane — Instrumentation Engineering Student</title>
-<meta name="description" content="Portfolio of Dewang Sewane, a final-year instrumentation engineering student — DCS/PLC experience, IoT projects and internships." />
+<title id="pageTitle">Dewang Sewane — Instrumentation Engineering Student</title>
+<meta name="description" id="pageDesc" content="Portfolio of Dewang Sewane, a final-year instrumentation engineering student — DCS/PLC experience, IoT projects and internships." />
+<meta name="color-scheme" content="light dark" />
+
+<!-- Apply saved / system theme before first paint (prevents a flash) -->
+<script>
+  (function () {
+    var theme = null;
+    try { theme = localStorage.getItem('theme'); } catch (e) {}
+    if (theme !== 'light' && theme !== 'dark') {
+      theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +26,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <style>
-  :root {
+  /* =====================================================================
+     EDIT HERE: COLOURS
+     The first block is the LIGHT theme, the second block is the DARK theme.
+     Change a value once and it updates everywhere on the page.
+     ===================================================================== */
+  :root,
+  :root[data-theme="light"] {
     --bg:            #F6F4ED;
     --bg-soft:       #EFEBE0;
     --surface:       #FFFFFF;
@@ -23,7 +42,9 @@
     --text-faint:    #A9A596;
 
     --olive:         #55613F;
+    --olive-hover:   #465132;
     --olive-soft:    #E3E7D9;
+    --on-olive:      #FFFFFF;
     --slate:         #3E5C76;
     --slate-soft:    #DEE6EC;
     --mustard:       #B8863A;
@@ -31,6 +52,39 @@
     --teal:          #3E7A73;
     --teal-soft:     #DCEBE7;
 
+    --header-bg:     rgba(246, 244, 237, 0.9);
+    --tag-bg:        rgba(255, 255, 255, 0.9);
+    --overlay:       rgba(30, 30, 24, 0.55);
+    --shadow:        rgba(38, 38, 32, 0.07);
+  }
+
+  :root[data-theme="dark"] {
+    --bg:            #13140F;
+    --bg-soft:       #1A1C14;
+    --surface:       #20231A;
+    --line:          #33372A;
+    --text:          #ECEADF;
+    --text-muted:    #A8A595;
+    --text-faint:    #7C7968;
+
+    --olive:         #A3B681;
+    --olive-hover:   #B7C998;
+    --olive-soft:    #2B3223;
+    --on-olive:      #14160F;
+    --slate:         #86A9C8;
+    --slate-soft:    #212D38;
+    --mustard:       #DDAE5F;
+    --mustard-soft:  #38301E;
+    --teal:          #73B8AF;
+    --teal-soft:     #1E3330;
+
+    --header-bg:     rgba(19, 20, 15, 0.88);
+    --tag-bg:        rgba(32, 35, 26, 0.9);
+    --overlay:       rgba(0, 0, 0, 0.7);
+    --shadow:        rgba(0, 0, 0, 0.35);
+  }
+
+  :root {
     --font-display:  'Poppins', sans-serif;
     --font-body:     'Inter', sans-serif;
 
@@ -40,16 +94,9 @@
     --ease:          cubic-bezier(.22,.68,0,1);
   }
 
-  * { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { 
-    scroll-behavior: smooth; 
-    scroll-padding-top: 96px; 
-  }
+  html { scroll-behavior: smooth; scroll-padding-top: 96px; }
 
   body {
     background: var(--bg);
@@ -57,716 +104,357 @@
     font-family: var(--font-body);
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    transition: background .3s var(--ease), color .3s var(--ease);
   }
 
-  img { 
-    max-width: 100%; 
-    display: block; 
-  }
+  body.modal-open { overflow: hidden; }
 
-  a { 
-    color: inherit; 
-    text-decoration: none; 
-  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; }
+  button, input, textarea { font-family: inherit; color: inherit; }
 
-  ul { 
-    list-style: none; 
-  }
-
-  button, input, textarea { 
-    font-family: inherit; 
-    color: inherit; 
-  }
-
-  .container { 
-    max-width: var(--container); 
-    margin: 0 auto; 
-    padding: 0 32px; 
-  }
+  .container { max-width: var(--container); margin: 0 auto; padding: 0 32px; }
 
   .eyebrow {
-    display: flex; 
-    align-items: center; 
-    gap: 10px;
+    display: flex; align-items: center; gap: 10px;
     font-family: var(--font-body);
-    font-size: 12.5px; 
-    font-weight: 600;
-    letter-spacing: 0.12em; 
-    text-transform: uppercase;
+    font-size: 12.5px; font-weight: 600;
+    letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--olive);
     margin-bottom: 16px;
   }
+  .eyebrow::before { content: ""; width: 20px; height: 2px; background: var(--olive); border-radius: 2px; }
 
-  .eyebrow::before { 
-    content: ""; 
-    width: 20px; 
-    height: 2px; 
-    background: var(--olive); 
-    border-radius: 2px; 
-  }
+  h1, h2, h3 { font-family: var(--font-display); color: var(--text); letter-spacing: -0.01em; }
 
-  h1, h2, h3 { 
-    font-family: var(--font-display); 
-    color: var(--text); 
-    letter-spacing: -0.01em; 
-  }
+  .wave-divider { display: flex; justify-content: center; padding: 6px 0; }
+  .wave-divider svg { width: 220px; height: 18px; opacity: 0.55; }
+  .wave-divider path { stroke: var(--text-faint); }
 
-  .wave-divider { 
-    display: flex; 
-    justify-content: center; 
-    padding: 6px 0; 
-  }
-
-  .wave-divider svg { 
-    width: 220px; 
-    height: 18px; 
-    opacity: 0.55; 
-  }
-
-  /* ===== Header Styles ===== */
+  /* ===== Header ===== */
   header {
-    position: sticky; 
-    top: 0; 
-    z-index: 1000;
-    background: rgba(246, 244, 237, 0.9);
+    position: sticky; top: 0; z-index: 1000;
+    background: var(--header-bg);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--line);
+    transition: background .3s var(--ease);
   }
 
   header .bar {
-    max-width: var(--container); 
-    margin: 0 auto; 
-    padding: 20px 32px;
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between;
+    max-width: var(--container); margin: 0 auto; padding: 20px 32px;
+    display: flex; align-items: center; justify-content: space-between;
   }
 
-  .logo { 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-    font-family: var(--font-display); 
-    font-weight: 700; 
-    font-size: 16px; 
-  }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-weight: 700; font-size: 16px; }
 
   .logo .mark {
-    width: 34px; 
-    height: 34px; 
-    border-radius: 9px;
-    background: var(--olive); 
-    color: #fff;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    font-size: 13px; 
-    font-weight: 700;
+    width: 34px; height: 34px; border-radius: 9px;
+    background: var(--olive); color: var(--on-olive);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700;
   }
 
-  .logo small { 
-    display: block; 
-    font-weight: 400; 
-    font-size: 10.5px; 
-    color: var(--text-muted); 
-    letter-spacing: 0.04em; 
-  }
+  .logo small { display: block; font-weight: 400; font-size: 10.5px; color: var(--text-muted); letter-spacing: 0.04em; }
 
-  nav.nav-desktop { 
-    display: flex; 
-    align-items: center; 
-    gap: 34px; 
-  }
+  nav.nav-desktop { display: flex; align-items: center; gap: 30px; }
+  nav.nav-desktop a { font-size: 14px; font-weight: 500; color: var(--text-muted); transition: color .2s var(--ease); }
+  nav.nav-desktop a:hover { color: var(--olive); }
 
-  nav.nav-desktop a { 
-    font-size: 14px; 
-    font-weight: 500; 
-    color: var(--text-muted); 
-    transition: color .2s var(--ease); 
-  }
-
-  nav.nav-desktop a:hover { 
-    color: var(--olive); 
-  }
-
-  .header-cta { 
-    display: flex; 
-    align-items: center; 
-    gap: 16px; 
-  }
+  .header-cta { display: flex; align-items: center; gap: 12px; }
 
   .btn {
-    display: inline-flex; 
-    align-items: center; 
-    gap: 8px;
-    padding: 11px 22px; 
-    border-radius: 999px;
-    font-size: 13.5px; 
-    font-weight: 600;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 22px; border-radius: 999px;
+    font-size: 13.5px; font-weight: 600;
     border: 1px solid var(--line);
     background: transparent;
     cursor: pointer;
     transition: all .25s var(--ease);
   }
+  .btn:hover { border-color: var(--olive); transform: translateY(-1px); }
 
-  .btn:hover { 
-    border-color: var(--olive); 
-    transform: translateY(-1px); 
-  }
+  .btn-solid { background: var(--olive); color: var(--on-olive); border-color: var(--olive); }
+  .btn-solid:hover { background: var(--olive-hover); border-color: var(--olive-hover); box-shadow: 0 8px 20px rgba(85, 97, 63, 0.25); }
 
-  .btn-solid { 
-    background: var(--olive); 
-    color: #fff; 
-    border-color: var(--olive); 
+  /* Theme toggle */
+  .theme-toggle {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid var(--line); background: transparent;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 14px; color: var(--text);
+    transition: all .25s var(--ease);
   }
-
-  .btn-solid:hover { 
-    background: #465132; 
-    box-shadow: 0 8px 20px rgba(85, 97, 63, 0.25); 
-  }
+  .theme-toggle:hover { border-color: var(--olive); color: var(--olive); }
+  .theme-toggle .fa-sun { display: none; }
+  :root[data-theme="dark"] .theme-toggle .fa-sun { display: inline; }
+  :root[data-theme="dark"] .theme-toggle .fa-moon { display: none; }
 
   .menu-toggle {
-    display: none; 
-    flex-direction: column; 
-    gap: 5px;
-    width: 36px; 
-    height: 36px; 
-    align-items: center; 
-    justify-content: center;
-    border-radius: 50%; 
-    border: 1px solid var(--line); 
-    background: transparent; 
-    cursor: pointer;
+    display: none; flex-direction: column; gap: 5px;
+    width: 36px; height: 36px; align-items: center; justify-content: center;
+    border-radius: 50%; border: 1px solid var(--line); background: transparent; cursor: pointer;
   }
-
-  .menu-toggle span { 
-    width: 16px; 
-    height: 2px; 
-    background: var(--text); 
-    border-radius: 2px; 
-    transition: transform .3s var(--ease), opacity .3s var(--ease); 
-  }
-
+  .menu-toggle span { width: 16px; height: 2px; background: var(--text); border-radius: 2px; transition: transform .3s var(--ease), opacity .3s var(--ease); }
   .menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
   .menu-toggle.active span:nth-child(2) { opacity: 0; }
   .menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
   .nav-mobile {
-    display: none; 
-    position: fixed; 
-    top: 74px; 
-    left: 16px; 
-    right: 16px;
-    background: var(--surface); 
-    border: 1px solid var(--line); 
-    border-radius: var(--radius);
-    padding: 10px; 
-    z-index: 999; 
-    flex-direction: column; 
-    gap: 2px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    transform: translateY(-12px); 
-    opacity: 0; 
-    pointer-events: none;
+    display: none; position: fixed; top: 74px; left: 16px; right: 16px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 10px; z-index: 999; flex-direction: column; gap: 2px;
+    box-shadow: 0 20px 40px var(--shadow);
+    transform: translateY(-12px); opacity: 0; pointer-events: none;
     transition: all .3s var(--ease);
   }
+  .nav-mobile.active { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .nav-mobile a { padding: 14px 16px; border-radius: var(--radius-sm); font-size: 15px; color: var(--text-muted); }
+  .nav-mobile a:hover { background: var(--bg-soft); color: var(--text); }
+  .nav-mobile .btn { margin: 8px 8px 4px; justify-content: center; color: var(--on-olive); }
 
-  .nav-mobile.active { 
-    transform: translateY(0); 
-    opacity: 1; 
-    pointer-events: auto; 
-  }
+  section { padding: 100px 0; }
 
-  .nav-mobile a { 
-    padding: 14px 16px; 
-    border-radius: var(--radius-sm); 
-    font-size: 15px; 
-    color: var(--text-muted); 
-  }
+  .section-head { max-width: 560px; margin-bottom: 52px; }
+  .section-head h2 { font-size: clamp(24px, 3vw, 32px); font-weight: 600; }
+  .section-head p { color: var(--text-muted); margin-top: 12px; font-size: 15px; }
 
-  .nav-mobile a:hover { 
-    background: var(--bg-soft); 
-    color: var(--text); 
-  }
+  /* ===== Hero ===== */
+  #hero { padding-top: 76px; padding-bottom: 60px; }
 
-  .nav-mobile .btn { 
-    margin: 8px 8px 4px; 
-    justify-content: center; 
-  }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
 
-  section { 
-    padding: 100px 0; 
-  }
+  .hero-copy h1 { font-size: clamp(44px, 6vw, 68px); font-weight: 600; line-height: 1.1; margin-bottom: 10px; }
+  .hero-copy .lede { color: var(--text-muted); font-size: 15.5px; max-width: 480px; margin-bottom: 32px; }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
 
-  .section-head { 
-    max-width: 560px; 
-    margin-bottom: 52px; 
-  }
-
-  .section-head h2 { 
-    font-size: clamp(24px, 3vw, 32px); 
-    font-weight: 600; 
-  }
-
-  .section-head p { 
-    color: var(--text-muted); 
-    margin-top: 12px; 
-    font-size: 15px; 
-  }
-
-  /* ===== Hero Section ===== */
-  #hero { 
-    padding-top: 76px; 
-    padding-bottom: 60px; 
-  }
-
-  .hero-grid { 
-    display: grid; 
-    grid-template-columns: 1.05fr 0.95fr; 
-    gap: 56px; 
-    align-items: center; 
-  }
-
-  .hero-copy h1 { 
-    font-size: clamp(72px, 4.4vw, 50px); 
-    font-weight: 600; 
-    line-height: 1.16; 
-    margin-bottom: 10px; 
-  }
-
-  .hero-copy .lede { 
-    color: var(--text-muted); 
-    font-size: 15.5px; 
-    max-width: 440px; 
-    margin-bottom: 32px; 
-  }
-
-  .hero-actions { 
-    display: flex; 
-    gap: 16px; 
-    flex-wrap: wrap; 
-  }
-
-  .hero-visual { 
-    position: relative; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-  }
+  .hero-visual { position: relative; display: flex; align-items: center; justify-content: center; }
 
   .panel {
-    position: relative; 
-    width: 100%; 
-    max-width: 400px; 
-    aspect-ratio: 1/1;
-    background: var(--surface); 
-    border: 1px solid var(--line); 
-    border-radius: 24px;
-    overflow: hidden;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    box-shadow: 0 30px 60px rgba(38, 38, 32, 0.06);
+    position: relative; width: 100%; max-width: 400px; aspect-ratio: 1/1;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 24px;
+    overflow: hidden; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 30px 60px var(--shadow);
   }
-
-  .panel img.hero-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  .panel img.hero-photo { width: 100%; height: 100%; object-fit: cover; }
 
   .panel-tag {
-    position: absolute; 
-    bottom: 16px; 
-    left: 50%; 
-    transform: translateX(-50%);
-    background: rgba(255, 255, 255, 0.9); 
-    backdrop-filter: blur(8px); 
-    border: 1px solid var(--line);
-    padding: 9px 18px; 
-    border-radius: 999px;
-    font-size: 12px; 
-    font-weight: 600; 
-    color: var(--olive);
-    white-space: nowrap; 
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+    position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+    background: var(--tag-bg); backdrop-filter: blur(8px); border: 1px solid var(--line);
+    padding: 9px 18px; border-radius: 999px;
+    font-size: 12px; font-weight: 600; color: var(--olive);
+    white-space: nowrap; box-shadow: 0 10px 24px var(--shadow);
   }
 
-  .dot-cluster { 
-    position: absolute; 
-    top: -10px; 
-    right: -16px; 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 7px; 
-    opacity: 0.5; 
-  }
-
-  .dot-cluster span { 
-    width: 5px; 
-    height: 5px; 
-    border-radius: 50%; 
-    background: var(--text-faint); 
-  }
-
-  /* ===== Skills Section ===== */
-  .skills-grid { 
-    display: grid; 
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 22px; 
-  }
+  /* ===== Skills ===== */
+  .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
 
   .skill-card {
-    background: var(--surface); 
-    border: 1px solid var(--line); 
-    border-radius: var(--radius);
-    padding: 30px 24px; 
-    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 30px 24px; transition: transform .3s var(--ease), box-shadow .3s var(--ease);
   }
-
-  .skill-card:hover { 
-    transform: translateY(-6px); 
-    box-shadow: 0 20px 40px rgba(38, 38, 32, 0.07); 
-  }
+  .skill-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px var(--shadow); }
 
   .skill-icon {
-    width: 46px; 
-    height: 46px; 
-    border-radius: 50%;
-    display: flex; 
-    align-items: center; 
-    justify-content: center;
-    font-size: 17px; 
-    margin-bottom: 20px;
+    width: 46px; height: 46px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; margin-bottom: 20px;
   }
+  .skill-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
+  .skill-card p { font-size: 13.5px; color: var(--text-muted); }
 
-  .skill-card h3 { 
-    font-size: 16px; 
-    font-weight: 600; 
-    margin-bottom: 8px; 
-  }
-
-  .skill-card p { 
-    font-size: 13.5px; 
-    color: var(--text-muted); 
-  }
-
-  /* ===== Projects & Experience Cards Grid ===== */
-  .proj-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-    gap: 26px; 
-  }
+  /* ===== Cards (projects / experience) ===== */
+  .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 26px; }
 
   .proj-card {
-    background: var(--surface); 
-    border: 1px solid var(--line); 
-    border-radius: var(--radius);
-    overflow: hidden; 
-    transition: transform .3s var(--ease), box-shadow .3s var(--ease);
-    display: flex; 
-    flex-direction: column;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    display: flex; flex-direction: column;
+  }
+  .proj-card:hover { transform: translateY(-6px); box-shadow: 0 24px 44px var(--shadow); }
+
+  .proj-thumb { height: 200px; width: 100%; overflow: hidden; background: var(--bg-soft); position: relative; }
+  .proj-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s var(--ease); }
+  .proj-card:hover .proj-thumb img { transform: scale(1.04); }
+
+  /* Shown when an image file is missing, so the layout never breaks */
+  .proj-thumb.noimg, .gallery figure.noimg .ph {
+    background: linear-gradient(135deg, var(--olive-soft), var(--slate-soft));
+  }
+  .proj-thumb.noimg img { display: none; }
+  .proj-thumb.noimg::after {
+    content: "\f03e"; font-family: "Font Awesome 6 Free"; font-weight: 900;
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 34px; color: var(--text-faint);
   }
 
-  .proj-card:hover { 
-    transform: translateY(-6px); 
-    box-shadow: 0 24px 44px rgba(38, 38, 32, 0.08); 
+  .proj-body { padding: 22px 22px 26px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  .proj-body .tag { font-size: 11.5px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 8px; display: block; }
+  .proj-body h3 { font-size: 16.5px; font-weight: 600; margin-bottom: 8px; }
+  .proj-body p { font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px; }
+  .proj-body p.org { color: var(--olive); font-weight: 500; margin-bottom: 8px; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+  .chip {
+    font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+    background: var(--olive-soft); color: var(--olive);
   }
 
-  .proj-thumb {
-    height: 200px; 
-    width: 100%; 
-    overflow: hidden;
-    background: var(--bg-soft);
+  .proj-link {
+    font-size: 13px; font-weight: 600; color: var(--olive);
+    display: inline-flex; align-items: center; gap: 7px; margin-top: auto;
+    background: none; border: none; cursor: pointer; padding: 0;
+  }
+  .proj-link i { transition: transform .25s var(--ease); font-size: 11px; }
+  .proj-card:hover .proj-link i.fa-arrow-right { transform: translateX(4px); }
+
+  /* Featured project (full width) */
+  .proj-card.featured { grid-column: 1 / -1; flex-direction: row; }
+  .proj-card.featured .proj-thumb { height: auto; min-height: 320px; width: 46%; flex-shrink: 0; }
+  .proj-card.featured .proj-body { padding: 34px 34px 30px; }
+  .proj-card.featured h3 { font-size: 21px; }
+  .proj-card.featured p { font-size: 14.5px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 5px 11px; border-radius: 999px; background: var(--mustard-soft); color: var(--mustard);
+    margin-bottom: 12px;
   }
 
-  .proj-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform .5s var(--ease);
-  }
+  /* ===== Vision ===== */
+  #future-vision { background: var(--bg-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .vision-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .vision-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px 24px; position: relative; }
+  .vision-card h3 { font-size: 17px; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--olive); }
+  .vision-card p { font-size: 14px; color: var(--text-muted); }
 
-  .proj-card:hover .proj-thumb img { 
-    transform: scale(1.04); 
-  }
+  /* ===== Timeline ===== */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item { display: grid; grid-template-columns: 70px 1fr; gap: 22px; padding: 26px 0; border-bottom: 1px solid var(--line); }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-num { font-family: var(--font-display); font-weight: 700; font-size: 20px; color: var(--text-faint); }
+  .tl-content { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 6px; }
+  .tl-content h3 { font-size: 16px; font-weight: 600; }
+  .tl-content .org { font-size: 13.5px; color: var(--olive); font-weight: 500; margin-top: 3px; }
+  .tl-content .desc { font-size: 13.5px; color: var(--text-muted); margin-top: 6px; max-width: 520px; }
+  .tl-period { font-size: 12.5px; color: var(--text-faint); font-weight: 600; white-space: nowrap; }
 
-  .proj-body { 
-    padding: 22px 22px 26px; 
-    flex: 1; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between; 
-  }
-
-  .proj-body .tag { 
-    font-size: 11.5px; 
-    font-weight: 600; 
-    letter-spacing: 0.04em; 
-    text-transform: uppercase; 
-    color: var(--text-faint); 
-    margin-bottom: 8px; 
-    display: block; 
-  }
-
-  .proj-body h3 { 
-    font-size: 16.5px; 
-    font-weight: 600; 
-    margin-bottom: 8px; 
-  }
-
-  .proj-body p { 
-    font-size: 13.5px; 
-    color: var(--text-muted); 
-    margin-bottom: 16px; 
-  }
-
-  .proj-link { 
-    font-size: 13px; 
-    font-weight: 600; 
-    color: var(--olive); 
-    display: inline-flex; 
-    align-items: center; 
-    gap: 7px; 
-    margin-top: auto; 
-  }
-
-  .proj-link i { 
-    transition: transform .25s var(--ease); 
-    font-size: 11px; 
-  }
-
-  .proj-card:hover .proj-link i { 
-    transform: translateX(4px); 
-  }
-
-  /* ===== Future Work / Career Vision ===== */
-  #future-vision { 
-    background: var(--bg-soft); 
-    border-top: 1px solid var(--line); 
-    border-bottom: 1px solid var(--line); 
-  }
-
-  .vision-grid { 
-    display: grid; 
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 24px; 
-  }
-
-  .vision-card {
-    background: var(--surface); 
-    border: 1px solid var(--line); 
-    border-radius: var(--radius);
-    padding: 32px 24px; 
-    position: relative;
-  }
-
-  .vision-card h3 { 
-    font-size: 17px; 
-    margin-bottom: 12px; 
-    display: flex; 
-    align-items: center; 
-    gap: 10px; 
-    color: var(--olive); 
-  }
-
-  .vision-card p { 
-    font-size: 14px; 
-    color: var(--text-muted); 
-  }
-
-  /* ===== Education / Certifications timeline ===== */
-  .timeline { 
-    display: flex; 
-    flex-direction: column; 
-    gap: 0; 
-  }
-
-  .tl-item {
-    display: grid; 
-    grid-template-columns: 70px 1fr; 
-    gap: 22px;
-    padding: 26px 0; 
-    border-bottom: 1px solid var(--line);
-  }
-
-  .tl-item:last-child { 
-    border-bottom: none; 
-  }
-
-  .tl-num { 
-    font-family: var(--font-display); 
-    font-weight: 700; 
-    font-size: 20px; 
-    color: var(--text-faint); 
-  }
-
-  .tl-content { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: flex-start; 
-    flex-wrap: wrap; 
-    gap: 6px; 
-  }
-
-  .tl-content h3 { 
-    font-size: 16px; 
-    font-weight: 600; 
-  }
-
-  .tl-content .org { 
-    font-size: 13.5px; 
-    color: var(--olive); 
-    font-weight: 500; 
-    margin-top: 3px; 
-  }
-
-  .tl-content .desc { 
-    font-size: 13.5px; 
-    color: var(--text-muted); 
-    margin-top: 6px; 
-    max-width: 520px; 
-  }
-
-  .tl-period { 
-    font-size: 12.5px; 
-    color: var(--text-faint); 
-    font-weight: 600; 
-    white-space: nowrap; 
-  }
-
-  /* ===== Refined Sleek Contact Section ===== */
-  #contact {
-    background: var(--bg-soft);
-    border-top: 1px solid var(--line);
-  }
-
-  .contact-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    max-width: 960px;
-    margin: 0 auto;
-  }
-
+  /* ===== Contact ===== */
+  #contact { background: var(--bg-soft); border-top: 1px solid var(--line); }
+  .contact-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 960px; margin: 0 auto; }
   .contact-card-item {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 28px 24px;
-    display: flex;
-    align-items: center;
-    gap: 18px;
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 28px 24px; display: flex; align-items: center; gap: 18px;
     transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
   }
-
-  .contact-card-item:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 40px rgba(38, 38, 32, 0.08);
-    border-color: var(--olive);
-  }
-
+  .contact-card-item:hover { transform: translateY(-6px); box-shadow: 0 20px 40px var(--shadow); border-color: var(--olive); }
   .contact-icon-box {
-    width: 50px;
-    height: 50px;
-    border-radius: 14px;
-    background: var(--olive-soft);
-    color: var(--olive);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
+    width: 50px; height: 50px; border-radius: 14px; background: var(--olive-soft); color: var(--olive);
+    display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0;
   }
+  .contact-card-content { display: flex; flex-direction: column; overflow: hidden; }
+  .card-label { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-faint); margin-bottom: 4px; }
+  .card-value { font-size: 14.5px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-  .contact-card-content {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  .card-label {
-    font-size: 11.5px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--text-faint);
-    margin-bottom: 4px;
-  }
-
-  .card-value {
-    font-size: 14.5px;
-    font-weight: 600;
-    color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* ===== Footer Section ===== */
-  footer { 
-    padding: 40px 0; 
-  }
-
+  /* ===== Footer ===== */
+  footer { padding: 40px 0; }
   .footer-inner {
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between; 
-    flex-wrap: wrap; 
-    gap: 16px;
-    padding-top: 26px; 
-    border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    padding-top: 26px; border-top: 1px solid var(--line);
   }
-
-  .footer-meta { 
-    font-size: 12.5px; 
-    color: var(--text-faint); 
-  }
-
-  .footer-socials { 
-    display: flex; 
-    gap: 10px; 
-  }
-
+  .footer-meta { font-size: 12.5px; color: var(--text-faint); }
+  .footer-socials { display: flex; gap: 10px; }
   .footer-socials a {
-    width: 34px; 
-    height: 34px; 
-    border-radius: 50%; 
-    border: 1px solid var(--line);
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-size: 13px; 
-    color: var(--text-muted);
+    width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--text-muted);
     transition: all .2s var(--ease);
   }
+  .footer-socials a:hover { background: var(--olive); color: var(--on-olive); border-color: var(--olive); }
 
-  .footer-socials a:hover { 
-    background: var(--olive); 
-    color: #fff; 
-    border-color: var(--olive); 
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ===== Project modal ===== */
+  .modal {
+    position: fixed; inset: 0; z-index: 2000; background: var(--overlay);
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 40px 16px; overflow-y: auto;
+    opacity: 0; pointer-events: none; transition: opacity .25s var(--ease);
   }
+  .modal.open { opacity: 1; pointer-events: auto; }
 
-  .reveal { 
-    opacity: 0; 
-    transform: translateY(20px); 
-    transition: opacity .6s var(--ease), transform .6s var(--ease); 
+  .modal-box {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 20px;
+    width: 100%; max-width: 860px; padding: 38px 38px 34px; position: relative;
+    transform: translateY(16px); transition: transform .3s var(--ease);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.25);
   }
+  .modal.open .modal-box { transform: translateY(0); }
 
-  .reveal.in { 
-    opacity: 1; 
-    transform: translateY(0); 
+  .modal-close {
+    position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid var(--line); background: var(--bg-soft); cursor: pointer; font-size: 14px;
+    display: flex; align-items: center; justify-content: center; transition: all .2s var(--ease);
   }
+  .modal-close:hover { border-color: var(--olive); color: var(--olive); }
 
-  /* ===== Responsive Breakpoints ===== */
+  .modal-box .tag { font-size: 11.5px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-faint); }
+  .modal-box h3 { font-size: 24px; font-weight: 600; margin: 6px 40px 6px 0; line-height: 1.3; }
+  .modal-box .sub { color: var(--olive); font-weight: 500; font-size: 14px; margin-bottom: 18px; }
+  .modal-box h4 { font-family: var(--font-display); font-size: 14px; font-weight: 600; margin: 26px 0 10px; color: var(--text); }
+  .modal-box p { font-size: 14px; color: var(--text-muted); }
+  .modal-box ul.points { display: flex; flex-direction: column; gap: 8px; }
+  .modal-box ul.points li { font-size: 14px; color: var(--text-muted); padding-left: 22px; position: relative; }
+  .modal-box ul.points li::before { content: "\f00c"; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 10px; position: absolute; left: 2px; top: 6px; color: var(--olive); }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-sm); }
+  .table-wrap table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .table-wrap th, .table-wrap td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--text-muted); white-space: nowrap; }
+  .table-wrap th { background: var(--bg-soft); color: var(--text); font-weight: 600; }
+  .table-wrap tr:last-child td { border-bottom: none; }
+
+  .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .gallery figure { background: var(--bg-soft); border: 1px solid var(--line); border-radius: var(--radius-sm); overflow: hidden; }
+  .gallery figure .ph { aspect-ratio: 4/3; background: var(--surface); }
+  .gallery figure img { width: 100%; height: 100%; object-fit: contain; cursor: zoom-in; }
+  .gallery figure.noimg img { display: none; }
+  .gallery figcaption { font-size: 12px; color: var(--text-muted); padding: 10px 12px; border-top: 1px solid var(--line); }
+
+  .lightbox {
+    position: fixed; inset: 0; z-index: 3000; background: rgba(0,0,0,0.88);
+    display: none; align-items: center; justify-content: center; padding: 24px; cursor: zoom-out;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; background: #fff; }
+
+
+  /* ===== Language Switcher (EN / 日本語) ===== */
+  .lang-bar { background: var(--bg-soft); border-bottom: 1px solid var(--line); }
+  .lang-bar-inner { display: flex; justify-content: flex-end; align-items: center; padding: 8px 32px; gap: 8px; }
+  .lang-switch { display: flex; align-items: center; gap: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 3px; }
+  .lang-switch button { border: none; background: transparent; padding: 5px 13px; border-radius: 999px; font-size: 12px; font-weight: 600; letter-spacing: 0.02em; cursor: pointer; color: var(--text-muted); font-family: inherit; transition: all .2s var(--ease); }
+  .lang-switch button:hover { color: var(--olive); }
+  .lang-switch button.active { background: var(--olive); color: var(--on-olive); }
+  html[lang="ja"] body { font-family: var(--font-body), "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Meiryo", sans-serif; }
+  html[lang="ja"] h1, html[lang="ja"] h2, html[lang="ja"] h3 { font-family: var(--font-display), "Hiragino Sans", "Yu Gothic", "Noto Sans JP", "Meiryo", sans-serif; }
+
+  /* ===== Gallery videos ===== */
+  .gallery.gallery-video { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); margin-top: 16px; }
+  .gallery figure.video .ph { aspect-ratio: 16/9; background: #000; position: relative; }
+  .gallery figure.video video, .gallery figure.video iframe { width: 100%; height: 100%; border: 0; display: block; background: #000; object-fit: contain; }
+
+  /* ===== Responsive ===== */
   @media (max-width: 1024px) {
     .vision-grid { grid-template-columns: 1fr; }
+    .proj-card.featured { flex-direction: column; }
+    .proj-card.featured .proj-thumb { width: 100%; min-height: 240px; }
   }
 
   @media (max-width: 768px) {
     nav.nav-desktop { display: none; }
     .menu-toggle { display: flex; }
     .nav-mobile { display: flex; }
+    .header-cta .btn { display: none; }
 
     section { padding: 72px 0; }
     #hero { padding-top: 40px; }
@@ -776,40 +464,125 @@
 
     .skills-grid { grid-template-columns: 1fr 1fr; }
     .tl-content { flex-direction: column; }
+    .modal-box { padding: 30px 22px 26px; }
+    .lang-bar-inner { padding: 8px 18px; justify-content: center; }
   }
 
   @media (max-width: 600px) {
     .container { padding: 0 18px; }
+    header .bar { padding: 16px 18px; }
     .skills-grid { grid-template-columns: 1fr; }
-    .hero-copy h1 { font-size: 30px; }
+    .proj-grid { grid-template-columns: 1fr; }
     .footer-inner { flex-direction: column; align-items: flex-start; }
     section { padding: 56px 0; }
     .tl-item { grid-template-columns: 40px 1fr; }
+    .proj-card.featured .proj-body { padding: 24px 22px; }
+    .gallery.gallery-video { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+    .reveal { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
 
+  <!--
+  ======================================================================
+   HOW TO EDIT THIS PORTFOLIO (read me first)
+  ======================================================================
+
+   TIP: press Ctrl+F (Cmd+F on Mac) and search for  EDIT HERE
+        every place you are expected to change is marked with it.
+
+   WHERE EACH IMAGE GOES
+   ~~~~~~~~~~~~~~~~~~~~~
+   1. PROFILE IMAGE ........ HERO section        (search: PROFILE IMAGE)
+   2. EXPERIENCE THUMBNAIL . EXPERIENCE section  (search: EXPERIENCE THUMBNAIL)
+   3. PROJECT THUMBNAIL .... PROJECTS section    (search: PROJECT THUMBNAIL)
+        = the small picture on the project card
+   4. PROJECT CONTENT IMAGES  script at the bottom of this file
+        (search: PROJECT CONTENT IMAGES)
+        = the gallery pictures inside the "View details" pop-up
+
+   IMAGE RULES
+   ~~~~~~~~~~~
+   - Use a file name from your images/ folder  ->  images/my-photo.jpg
+     or a full web link                        ->  https://...
+   - Thumbnails: about 600 x 400 px.   Gallery images: about 1200 px wide.
+   - If an image file is missing the layout stays intact (a placeholder is
+     shown on the card, and the tile is hidden inside the pop-up).
+
+   ADD A NEW PROJECT  (3 steps)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   1. Copy the "NEW PROJECT TEMPLATE" card in the PROJECTS section.
+   2. Give the card's button a new data-project="my-key".
+   3. Copy the template object in the script (search: NEW PROJECT DATA TEMPLATE)
+      and use the same key:  'my-key': { ... }
+
+   ADD A VIDEO TO A PROJECT GALLERY
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   In the script (search: PROJECT CONTENT IMAGES) add a line to a project's
+   gallery list. It works exactly like a picture, the page detects videos:
+     ['videos/my-demo.mp4', 'Caption']                 -> your own video file (.mp4 / .webm / .mov)
+     ['https://youtu.be/XXXXXXXXXXX', 'Caption']       -> YouTube link
+     ['https://drive.google.com/file/d/ID/view', 'Caption'] -> Google Drive video (share = anyone with link)
+   Videos show in their own row under the pictures. A missing file is skipped.
+
+   LANGUAGE BAR (EN / 日本語)
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~
+   Text on the page comes from the "translations" list in the script
+   (search: LANGUAGE). To change wording in Japanese, edit the "ja" block there.
+   Project pop-up Japanese text is in PROJECTS_JA (search: PROJECTS_JA).
+
+   OTHER THINGS YOU CAN CHANGE
+   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   - Colours (light + dark) ... top of the <style> block (search: COLOURS)
+   - Contact details ......... CONTACT section
+   - Resume link ............. HEADER (appears twice: desktop + mobile menu)
+  ======================================================================
+  -->
+
+  <!-- ==================== LANGUAGE SWITCHER ==================== -->
+  <div class="lang-bar">
+    <div class="container lang-bar-inner">
+      <div class="lang-switch" role="group" aria-label="Language selector">
+        <button type="button" id="langEnBtn" class="active" data-lang="en">EN</button>
+        <button type="button" id="langJaBtn" data-lang="ja">日本語</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ==================== HEADER ==================== -->
   <header id="siteHeader">
     <div class="bar">
+      <!-- EDIT HERE: logo initials ("DS"), your name and the small line under it -->
       <a href="#hero" class="logo">
         <span class="mark">DS</span>
-        <span>Dewang Sewane<small>Instrumentation Engineering</small></span>
+        <span>Dewang Sewane<small data-i18n="subtitle">Instrumentation Engineering</small></span>
       </a>
 
       <nav class="nav-desktop">
-        <a href="#hero">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#future-vision">Future Vision</a>
-        <a href="#education">Education</a>
+        <a href="#hero" data-i18n="nav_about">About</a>
+        <a href="#experience" data-i18n="nav_experience">Experience</a>
+        <a href="#skills" data-i18n="nav_skills">Skills</a>
+        <a href="#projects" data-i18n="nav_projects">Projects</a>
+        <a href="#future-vision" data-i18n="nav_vision">Future Vision</a>
+        <a href="#education" data-i18n="nav_education">Education</a>
       </nav>
 
+      <!-- Right side of the header: dark/light switch, resume button, contact button, mobile menu button -->
       <div class="header-cta">
-        <a href="https://drive.google.com/file/d/1iIPiMkae7lmbDpLdxbOpo4QBvol2N3zt/view?usp=sharing" class="btn" id="resumeBtn" download="Dewang_Sewane_Resume.pdf"><i class="fa-solid fa-arrow-down"></i> Resume</a>
-        <a href="#contact" class="btn btn-solid">Let's talk</a>
+
+        <!-- Dark / light mode switch (no changes needed) -->
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" title="Toggle light / dark mode">
+          <i class="fa-solid fa-moon"></i><i class="fa-solid fa-sun"></i>
+        </button>
+
+        <!-- EDIT HERE: RESUME LINK (desktop). Also update the same link in the mobile menu just below. -->
+        <a href="https://drive.google.com/file/d/1iIPiMkae7lmbDpLdxbOpo4QBvol2N3zt/view?usp=sharing" class="btn" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-down"></i> <span data-i18n="resume_btn">Resume</span></a>
+        <a href="#contact" class="btn btn-solid" data-i18n="lets_talk">Let's talk</a>
         <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
@@ -817,85 +590,114 @@
     </div>
 
     <nav class="nav-mobile" id="mobileNav">
-      <a href="#hero">About</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#future-vision">Future Vision</a>
-      <a href="#education">Education</a>
-      
-      <a href="resume.pdf" class="btn btn-solid" download="Dewang_Sewane_Resume.pdf"><i class="fa-solid fa-arrow-down"></i> Download resume</a>
+      <a href="#hero" data-i18n="nav_about">About</a>
+      <a href="#experience" data-i18n="nav_experience">Experience</a>
+      <a href="#skills" data-i18n="nav_skills">Skills</a>
+      <a href="#projects" data-i18n="nav_projects">Projects</a>
+      <a href="#future-vision" data-i18n="nav_vision">Future Vision</a>
+      <a href="#education" data-i18n="nav_education">Education</a>
+
+      <!-- EDIT HERE: RESUME LINK (mobile menu) -->
+      <a href="https://drive.google.com/file/d/1iIPiMkae7lmbDpLdxbOpo4QBvol2N3zt/view?usp=sharing" class="btn btn-solid" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-down"></i> <span data-i18n="resume_btn">Resume</span></a>
     </nav>
   </header>
 
   <main>
 
-    <!-- ==================== HERO SECTION ==================== -->
+    <!-- ==================== HERO ==================== -->
     <section id="hero">
       <div class="container hero-grid">
+        <!-- ~~~~~~~~~~ LEFT SIDE: text ~~~~~~~~~~ -->
         <div class="hero-copy reveal">
-         
-          <h1>Hello</h1>
-            <div class="eyebrow">I'm Dewang Sewane </div>
-          <p class="lede">Final-year instrumentation engineering student with hands-on experience configuring a Siemens PCS7 DCS and programming Siemens S7-1200 PLCs (TIA Portal). I've also built IoT-based wireless sensor networks with live remote dashboards. Looking to bring this control-systems and IoT background to a building automation or Industrial automation  role.</p>
+
+          <!-- EDIT HERE: big greeting word -->
+          <h1 data-i18n="hero_h1">Hello</h1>
+
+          <!-- EDIT HERE: small line under the greeting -->
+          <div class="eyebrow" data-i18n="hero_eyebrow">I'm Dewang Sewane</div>
+
+          <!-- EDIT HERE: introduction paragraph (keep it to 2 to 3 lines) -->
+          <p class="lede" data-i18n="hero_lede">Final-year instrumentation engineering student with hands-on experience configuring a Siemens PCS7 DCS and programming Siemens S7-1200 PLCs (TIA Portal). I've also built IoT-based wireless sensor networks with live remote dashboards. Looking to bring this control-systems and IoT background to a building automation or industrial automation role.</p>
+
+          <!-- Two buttons under the intro (change the text, or point the links to other sections) -->
           <div class="hero-actions">
-            <a href="#projects" class="btn btn-solid"><i class="fa-solid fa-diagram-project"></i> View my projects</a>
-            <a href="#contact" class="btn">Let's work together <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="#projects" class="btn btn-solid"><i class="fa-solid fa-diagram-project"></i> <span data-i18n="hero_btn1">View my projects</span></a>
+            <a href="#contact" class="btn"><span data-i18n="hero_btn2">Let's work together</span> <i class="fa-solid fa-arrow-right"></i></a>
           </div>
         </div>
 
+        <!-- ~~~~~~~~~~ RIGHT SIDE: profile picture ~~~~~~~~~~ -->
         <div class="hero-visual reveal">
-    <div class="panel">
+          <div class="panel">
 
-        <img class="hero-photo" src="./dd111.png" alt="D.D. Sewane">
+            <!-- EDIT HERE: PROFILE IMAGE
+                 Put your photo next to this file and change the file name in src.
+                 Best results: portrait or square photo, at least 800 x 800 px. -->
+            <img class="hero-photo" src="./dd111.png" alt="D.D. Sewane">
 
-        <div class="panel-tag">D.D. Sewane</div>
-
-    </div>
-</div>
+            <!-- EDIT HERE: name tag shown on the bottom of the photo -->
+            <div class="panel-tag">D.D. Sewane</div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <div class="wave-divider">
-      <svg viewBox="0 0 200 20"><path d="M0 10 Q25 0 50 10 T100 10 T150 10 T200 10" stroke="#A9A596" stroke-width="1.5" fill="none"/></svg>
+      <svg viewBox="0 0 200 20"><path d="M0 10 Q25 0 50 10 T100 10 T150 10 T200 10" stroke-width="1.5" fill="none"/></svg>
     </div>
 
-    <!-- ==================== EXPERIENCE SECTION ==================== -->
+    <!-- ==================== EXPERIENCE ==================== -->
     <section id="experience">
       <div class="container">
         <div class="section-head reveal">
-          <div class="eyebrow">Where I've worked</div>
-          <h2>Internships &amp; industrial training</h2>
-          <p>Hands-on time with real DCS/PLC hardware .</p>
+          <div class="eyebrow" data-i18n="exp_eyebrow">Where I've worked</div>
+          <h2 data-i18n="exp_h2">Internships &amp; industrial training</h2>
+          <p data-i18n="exp_p">Hands-on time with real DCS/PLC hardware.</p>
         </div>
 
+        <!-- Each <article> below is ONE experience card. Copy a whole <article> block to add another. -->
         <div class="proj-grid">
+
+          <!-- ================= Experience card 1 ================= -->
           <article class="proj-card reveal">
+
+            <!-- EDIT HERE: EXPERIENCE THUMBNAIL (picture on top of the card) -->
             <div class="proj-thumb">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChxT2Cx-AGVYynukKXtvR9SNX3wmc_gpPQFD_aDY8_sq_F18a0KQgW1I&s=10" alt="Siemens PCS7 DCS trainee kit">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTChxT2Cx-AGVYynukKXtvR9SNX3wmc_gpPQFD_aDY8_sq_F18a0KQgW1I&s=10" alt="Siemens PCS7 DCS trainee kit" loading="lazy">
             </div>
+
             <div class="proj-body">
               <div>
-                <span class="tag">Jul 2026 – Aug 2026</span>
-                <h3>Industrial Automation Trainee</h3>
-                <p style="color:var(--olive); font-weight:500; font-size:13.5px; margin-bottom:8px;">Siemens V.R. Jamdar CoE, VNIT Nagpur</p>
-                <p>Configured a PCS7 DCS trainee kit using SIMATIC Manager and CFC logic; programmed PLC ladder logic on a Siemens S7-1200 via TIA Portal; learned to configure industrial sensors.</p>
+                <!-- EDIT HERE: dates / role / company / description -->
+                <span class="tag" data-i18n="exp1_tag">Jul 2026 – Aug 2026</span>
+                <h3 data-i18n="exp1_title">Industrial Automation Trainee</h3>
+                <p class="org">Siemens V.R. Jamdar CoE, VNIT Nagpur</p>
+                <p data-i18n="exp1_desc">Configured a PCS7 DCS trainee kit using SIMATIC Manager and CFC logic; programmed PLC ladder logic on a Siemens S7-1200 via TIA Portal; learned to configure industrial sensors.</p>
               </div>
-              <a href="https://drive.google.com/file/d/1etmlMfmc0IqTiIpjuL-miMDcFsBuXGWj/view?usp=sharing" target="_blank" rel="noopener" class="proj-link" style="margin-top: 16px;">
-                <i class="fa-solid fa-certificate"></i> View Certificate <i class="fa-solid fa-arrow-right"></i>
+
+              <!-- EDIT HERE: certificate link (delete this whole <a> block if there is no certificate) -->
+              <a href="https://drive.google.com/file/d/1etmlMfmc0IqTiIpjuL-miMDcFsBuXGWj/view?usp=sharing" target="_blank" rel="noopener" class="proj-link">
+                <i class="fa-solid fa-certificate"></i> <span data-i18n="exp1_link">View Certificate</span> <i class="fa-solid fa-arrow-right"></i>
               </a>
             </div>
           </article>
 
+
+          <!-- ================= Experience card 2 ================= -->
           <article class="proj-card reveal">
+
+            <!-- EDIT HERE: EXPERIENCE THUMBNAIL -->
             <div class="proj-thumb">
-              <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="PLC and VFD panel assembly">
+              <img src="C:\Users\DEWANG\Desktop\New folder\PLC & VFD Panel Assembly Internship.gif" alt="PLC and VFD panel assembly" loading="lazy">
             </div>
+
             <div class="proj-body">
               <div>
-                <span class="tag">Industrial Training · 5 Days</span>
-                <h3>PLC &amp; VFD Panel Assembly</h3>
-                <p style="color:var(--olive); font-weight:500; font-size:13.5px; margin-bottom:8px;">Singh Electrical Pvt Ltd</p>
-                <p>Observed and assisted in assembling PLC and VFD panels — wiring, layout and reading circuit diagrams — under guidance of senior technicians.</p>
+                <!-- EDIT HERE: dates / role / company / description -->
+                <span class="tag" data-i18n="exp2_tag">Industrial Training · 5 Days</span>
+                <h3 data-i18n="exp2_title">PLC &amp; VFD Panel Assembly</h3>
+                <p class="org">Singh Electrical Pvt Ltd</p>
+                <p data-i18n="exp2_desc">Observed and assisted in assembling PLC and VFD panels — wiring, layout and reading circuit diagrams — under guidance of senior technicians.</p>
               </div>
             </div>
           </article>
@@ -903,122 +705,237 @@
       </div>
     </section>
 
-    <!-- ==================== SKILLS SECTION ==================== -->
+    <!-- ==================== SKILLS ==================== -->
     <section id="skills">
       <div class="container">
         <div class="section-head reveal">
-          <div class="eyebrow">What I know</div>
-          <h2> Skills</h2>
-          <p>Coursework, internship and project work across DCS/PLC control and IoT-based monitoring.</p>
+          <div class="eyebrow" data-i18n="skills_eyebrow">What I know</div>
+          <h2 data-i18n="skills_h2">Skills</h2>
+          <p data-i18n="skills_p">Coursework, internship and project work across DCS/PLC control and IoT-based monitoring.</p>
         </div>
 
+        <!-- EDIT HERE: SKILLS. Each skill-card is one box: icon, title, short description.
+             Icons come from Font Awesome (https://fontawesome.com/icons). Replace the name after "fa-solid fa-". -->
         <div class="skills-grid">
+
           <div class="skill-card reveal">
             <div class="skill-icon" style="background:var(--olive-soft); color:var(--olive);"><i class="fa-solid fa-server"></i></div>
-            <h3>DCS Configuration</h3>
-            <p>Hands-on with Siemens PCS7 DCS, configuring control logic using CFC (Continuous Function Chart) in SIMATIC Manager.</p>
+            <h3 data-i18n="skill1_title">DCS Configuration</h3>
+            <p data-i18n="skill1_desc">Hands-on with Siemens PCS7 DCS, configuring control logic using CFC (Continuous Function Chart) in SIMATIC Manager.</p>
           </div>
           <div class="skill-card reveal">
             <div class="skill-icon" style="background:var(--slate-soft); color:var(--slate);"><i class="fa-solid fa-microchip"></i></div>
-            <h3>PLC Programming</h3>
-            <p>Hands-on ladder logic programming in TIA Portal on Siemens S7-1200 and S7-1500 — the building blocks (bit logic, timers, counters) behind any PLC-controlled process.</p>
+            <h3 data-i18n="skill2_title">PLC &amp; HMI Programming</h3>
+            <p data-i18n="skill2_desc">Ladder logic in TIA Portal on Siemens S7-1200 and S7-1500 — bit logic, timers, counters, Modbus TCP (MB_CLIENT) and KTP700 HMI screens.</p>
           </div>
           <div class="skill-card reveal">
             <div class="skill-icon" style="background:var(--mustard-soft); color:var(--mustard);"><i class="fa-solid fa-satellite-dish"></i></div>
-            <h3>Sensors &amp; Transducers</h3>
-            <p>Interfacing thermocouples, ultrasonic and industrial sensors; process instrumentation and signal conditioning.</p>
+            <h3 data-i18n="skill3_title">Sensors &amp; Transducers</h3>
+            <p data-i18n="skill3_desc">Interfacing thermocouples, ultrasonic, DHT11, MQ-2 gas and flame sensors; process instrumentation and signal conditioning.</p>
           </div>
           <div class="skill-card reveal">
             <div class="skill-icon" style="background:var(--teal-soft); color:var(--teal);"><i class="fa-solid fa-wifi"></i></div>
-            <h3>IoT &amp; Remote Monitoring</h3>
-            <p>Wireless sensor networks with ESP32/ESP-NOW, live dashboards on Blynk, and remote data visualization.</p>
+            <h3 data-i18n="skill4_title">IoT &amp; Wireless Networks</h3>
+            <p data-i18n="skill4_desc">ESP32 wireless sensor nodes, ESP-NOW, Modbus TCP over Wi-Fi, and live dashboards on Blynk for remote data visualization.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== PROJECTS SECTION ==================== -->
+    <!-- ==================== PROJECTS ==================== -->
     <section id="projects">
       <div class="container">
         <div class="section-head reveal">
-          <div class="eyebrow">Selected work</div>
-          <h2>Projects</h2>
-          <p>Two projects combining sensor hardware with wireless, remote-monitoring dashboards.</p>
+          <div class="eyebrow" data-i18n="proj_eyebrow">Selected work</div>
+          <h2 data-i18n="proj_h2">Projects</h2>
+          <p data-i18n="proj_p">From PLC sequence control to wireless sensor networks tied into industrial controllers.</p>
         </div>
 
+        <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+             Each <article> is ONE project card. Order on the page = order here.
+             The text on the card is a short teaser. The full story (key points, table,
+             tools, gallery) lives in the script at the bottom, under PROJECTS.
+             The button's data-project="..." must match a key in that script.
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
         <div class="proj-grid">
-          <article class="proj-card reveal">
+
+          <!-- ================= Project 1: Major project (featured card) ================= -->
+          <article class="proj-card featured reveal">
+
+            <!-- EDIT HERE: PROJECT THUMBNAIL (picture on the card) -->
             <div class="proj-thumb">
-              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="Wireless temperature transmitter setup">
+              <img src="C:\Users\DEWANG\Desktop\New folder\WSN thumbnail.png">
             </div>
             <div class="proj-body">
               <div>
-                <span class="tag">Minor Project · Jan 2026 – May 2026</span>
-                <h3>Wireless Temperature Transmitter with IoT-Based Remote Monitoring</h3>
-                <p>Designed a wireless thermocouple-based temperature transmitter using ESP-NOW communication between ESP32 units, with a Blynk IoT dashboard for real-time remote monitoring and a 16×2 I2C LCD display — replicating the remote-monitoring function at the core of a BMS.</p>
+                <!-- EDIT HERE: project info shown on the card (badge, tag line, title, short description, tool chips) -->
+                <span class="badge"><i class="fa-solid fa-star"></i> <span data-i18n="badge_major">Major Project</span></span>
+                <span class="tag" data-i18n="p1_tag">B.Tech 7th Semester · IN1706 · 2026–27</span>
+                <h3 data-i18n="p1_title">WSN-Based Intelligent Building Automation Using PLC</h3>
+                <p data-i18n="p1_desc">An ESP32 wireless sensor node measures temperature, humidity, smoke/gas and flame, and serves the data over Modbus TCP on Wi-Fi. A Siemens S7-1200 PLC polls it with MB_CLIENT, scales the values, runs the alarm and ventilation logic, and shows everything live on a KTP700 HMI.</p>
+                <div class="chips">
+                  <span class="chip">ESP32</span>
+                  <span class="chip">S7-1200</span>
+                  <span class="chip">TIA Portal V19</span>
+                  <span class="chip">Modbus TCP</span>
+                  <span class="chip">KTP700 HMI</span>
+                  <span class="chip">DHT11 · MQ-2 · Flame</span>
+                </div>
               </div>
-              <a href="#" class="proj-link">View details <i class="fa-solid fa-arrow-right"></i></a>
+
+              <!-- data-project must match the key in the PROJECTS script ('wsn-bms') -->
+              <button class="proj-link" type="button" data-project="wsn-bms"><span data-i18n="btn_full">View full details</span> <i class="fa-solid fa-arrow-right"></i></button>
             </div>
           </article>
 
+
+          <!-- ================= Project 2: Rotary bottle filling ================= -->
           <article class="proj-card reveal">
+
+            <!-- EDIT HERE: PROJECT THUMBNAIL -->
             <div class="proj-thumb">
-              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" alt="Non-contact liquid level monitoring system">
+              <img src="C:\Users\DEWANG\Desktop\New folder\Rotary Bottle Filling System Animation.gif">
             </div>
             <div class="proj-body">
               <div>
-                <span class="tag">Mini Project · Mar 2025 – Apr 2025</span>
-                <h3>Non-Contact Liquid Level Monitoring System</h3>
-                <p>Built a non-contact water tank level monitoring system using an HC-SR04 ultrasonic sensor and Arduino Uno for real-time facility water-level tracking — automating a manual inspection task comparable to utility monitoring in building automation systems.</p>
+                <!-- EDIT HERE: project info shown on the card -->
+                <span class="tag" data-i18n="p2_tag">PLC Project</span>
+                <h3 data-i18n="p2_title">PLC-Based Rotary Bottle Filling System Automation</h3>
+                <p data-i18n="p2_desc">Ladder logic in Siemens TIA Portal for automated rotary bottle filling, with sequential control of rotary indexing and filling, and sensors for bottle positioning, presence detection and fill-completion monitoring.</p>
+                <div class="chips">
+                  <span class="chip">TIA Portal</span>
+                  <span class="chip">Ladder Logic</span>
+                  <span class="chip">Sequential Control</span>
+                </div>
               </div>
-              <a href="#" class="proj-link">View details <i class="fa-solid fa-arrow-right"></i></a>
+
+              <button class="proj-link" type="button" data-project="bottle-filling"><span data-i18n="btn_details">View details</span> <i class="fa-solid fa-arrow-right"></i></button>
             </div>
           </article>
+
+
+          <!-- ================= Project 3: Minor project ================= -->
+          <article class="proj-card reveal">
+
+            <!-- EDIT HERE: PROJECT THUMBNAIL -->
+            <div class="proj-thumb">
+              <img src="C:\Users\DEWANG\Desktop\New folder\Wireless Temperature Monitoring System.png" alt="Wireless temperature transmitter setup" loading="lazy">
+            </div>
+            <div class="proj-body">
+              <div>
+                <!-- EDIT HERE: project info shown on the card -->
+                <span class="tag" data-i18n="p3_tag">Minor Project · Jan 2026 – May 2026</span>
+                <h3 data-i18n="p3_title">Wireless Temperature Transmitter with IoT-Based Remote Monitoring</h3>
+                <p data-i18n="p3_desc">Wireless thermocouple-based temperature transmitter using ESP-NOW between ESP32 units, with a Blynk IoT dashboard for real-time remote monitoring and a 16×2 I2C LCD display — the remote-monitoring function at the core of a BMS.</p>
+              </div>
+
+              <button class="proj-link" type="button" data-project="temp-transmitter"><span data-i18n="btn_details">View details</span> <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </article>
+
+
+          <!-- ================= Project 4: Mini project ================= -->
+          <article class="proj-card reveal">
+
+            <!-- EDIT HERE: PROJECT THUMBNAIL -->
+            <div class="proj-thumb">
+              <img src="C:\Users\DEWANG\Desktop\New folder\HC-SR04 Water Tank Level Diagram.png" alt="Non-contact liquid level monitoring system" loading="lazy">
+            </div>
+            <div class="proj-body">
+              <div>
+                <!-- EDIT HERE: project info shown on the card -->
+                <span class="tag" data-i18n="p4_tag">Mini Project · Mar 2025 – Apr 2025</span>
+                <h3 data-i18n="p4_title">Non-Contact Liquid Level Monitoring System</h3>
+                <p data-i18n="p4_desc">Non-contact water tank level monitoring using an HC-SR04 ultrasonic sensor and Arduino Uno for real-time facility water-level tracking — automating a manual inspection task comparable to utility monitoring in building automation.</p>
+              </div>
+
+              <button class="proj-link" type="button" data-project="liquid-level"><span data-i18n="btn_details">View details</span> <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </article>
+
+
+          <!-- ====================================================================
+               NEW PROJECT TEMPLATE
+               To add a project: copy this block, paste it OUTSIDE the comment (above this
+               comment), fill in the details, then add matching data in the script
+               (search: NEW PROJECT DATA TEMPLATE).
+
+          <article class="proj-card reveal">
+
+            EDIT HERE: PROJECT THUMBNAIL
+            <div class="proj-thumb">
+              <img src="images/my-project/thumbnail.jpg" alt="Short description of the picture" loading="lazy">
+            </div>
+
+            <div class="proj-body">
+              <div>
+                EDIT HERE: project info shown on the card
+                <span class="tag">Project type · Month Year</span>
+                <h3>Project title</h3>
+                <p>One or two sentences that explain what the project does.</p>
+
+                Optional tool chips
+                <div class="chips">
+                  <span class="chip">Tool 1</span>
+                  <span class="chip">Tool 2</span>
+                </div>
+              </div>
+
+              data-project must match the key you add in the script
+              <button class="proj-link" type="button" data-project="my-key">View details <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </article>
+
+               ==================================================================== -->
+
         </div>
       </div>
     </section>
 
-    <!-- ==================== FUTURE WORK SECTION ==================== -->
+    <!-- ==================== FUTURE VISION ==================== -->
     <section id="future-vision">
       <div class="container">
         <div class="section-head reveal">
-          <div class="eyebrow">Career roadmap</div>
-          <h2>Future work &amp; career vision</h2>
-          </div>
+          <div class="eyebrow" data-i18n="vis_eyebrow">Career roadmap</div>
+          <h2 data-i18n="vis_h2">Future work &amp; career vision</h2>
+        </div>
 
+        <!-- EDIT HERE: each vision-card is one goal (icon, title, description) -->
         <div class="vision-grid">
           <div class="vision-card reveal">
-            <h3><i class="far fa-building"></i>Building Automation  &amp; Smart Infrastructure </h3>
-            <p>Contribute to smart building management systems (BMS) and renewable energy integration projects to minimize energy wastage and build sustainable, automated industrial environments..</p>
+            <h3><i class="far fa-building"></i> <span data-i18n="vis1_title">Building Automation &amp; Smart Infrastructure</span></h3>
+            <p data-i18n="vis1_desc">Contribute to smart building management systems (BMS) and renewable energy integration projects to minimize energy wastage and build sustainable, automated environments.</p>
           </div>
           <div class="vision-card reveal">
-            <h3><i class="fa-solid fa-network-wired"></i> Industrial Automation &amp; DCS</h3>
-            <p>Bridge traditional operational technology (OT) with modern IT systems by deploying robust SCADA platforms and cloud-connected edge IoT sensors to optimize predictive plant maintenance.</p>
+            <h3><i class="fa-solid fa-network-wired"></i> <span data-i18n="vis2_title">Industrial IoT &amp; SCADA Integration</span></h3>
+            <p data-i18n="vis2_desc">Bridge traditional operational technology (OT) with modern IT systems by deploying robust SCADA platforms and cloud-connected edge IoT sensors to optimize predictive plant maintenance.</p>
           </div>
           <div class="vision-card reveal">
-            <h3><i class="fa-solid fa-industry"></i>Industrial IoT &amp; SCADA Integration </h3>
-            <p>Deepen my expertise in large-scale Distributed Control Systems (DCS) and safety-instrumented systems (SIS) for core process plants, power generation stations, and heavy manufacturing units.</p>
+            <h3><i class="fa-solid fa-industry"></i> <span data-i18n="vis3_title">Industrial Automation &amp; DCS</span></h3>
+            <p data-i18n="vis3_desc">Deepen my expertise in large-scale Distributed Control Systems (DCS) and safety-instrumented systems (SIS) for core process plants, power generation stations, and heavy manufacturing units.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== EDUCATION SECTION ==================== -->
+    <!-- ==================== EDUCATION ==================== -->
     <section id="education">
       <div class="container">
         <div class="section-head reveal">
-          <div class="eyebrow">Background</div>
-          <h2>Education</h2>
+          <div class="eyebrow" data-i18n="edu_eyebrow">Background</div>
+          <h2 data-i18n="edu_h2">Education</h2>
         </div>
 
+        <!-- EDIT HERE: EDUCATION. Each tl-item is one entry (number, degree, college, years). Copy one to add more. -->
         <div class="timeline">
+
           <div class="tl-item reveal">
             <div class="tl-num">01</div>
             <div class="tl-content">
               <div>
-                <h3>B.Tech, Instrumentation Engineering</h3>
+                <h3 data-i18n="edu1_title">B.Tech, Instrumentation Engineering</h3>
                 <div class="org">Government College of Engineering, Amravati</div>
-                <p class="desc"> Relevant coursework: Sensor and Transducer (IN1403), Process Control (IN1601), Industrial Automation (IN1502).</p>
+                <p class="desc" data-i18n="edu1_desc">Relevant coursework: Sensor and Transducer (IN1403), Process Control (IN1601), Industrial Automation (IN1502).</p>
               </div>
               <div class="tl-period">2023 — 2027</div>
             </div>
@@ -1028,7 +945,7 @@
             <div class="tl-num">02</div>
             <div class="tl-content">
               <div>
-                <h3> Higher Secondary Certificate (Class 12)</h3>
+                <h3 data-i18n="edu2_title">Higher Secondary Certificate (Class 12)</h3>
                 <div class="org">Dharampeth M.P. Deo Memorial Science College, Nagpur</div>
               </div>
               <div class="tl-period">2023</div>
@@ -1039,9 +956,8 @@
             <div class="tl-num">03</div>
             <div class="tl-content">
               <div>
-                <h3>Secondary School Certificate (class 10)</h3>
+                <h3 data-i18n="edu3_title">Secondary School Certificate (Class 10)</h3>
                 <div class="org">Rai English High School, Nagpur</div>
-                
               </div>
               <div class="tl-period">2021</div>
             </div>
@@ -1049,48 +965,51 @@
         </div>
 
         <div class="section-head reveal" style="margin-top:56px; margin-bottom:24px;">
-          <div class="eyebrow">Beyond academics</div>
-          <h2>Leadership &amp; extracurriculars</h2>
+          <div class="eyebrow" data-i18n="lead_eyebrow">Beyond academics</div>
+          <h2 data-i18n="lead_h2">Leadership &amp; extracurriculars</h2>
         </div>
+        <!-- EDIT HERE: LEADERSHIP / EXTRACURRICULARS (same box style as skills) -->
         <div class="skills-grid">
           <div class="skill-card reveal" style="padding:22px 20px;">
             <div class="skill-icon" style="background:var(--olive-soft); color:var(--olive); width:38px; height:38px; font-size:14px;"><i class="fa-solid fa-hand-holding-heart"></i></div>
-            <h3 style="font-size:14.5px;">NSS Member</h3>
-            <p style="font-size:13px;">National Service Scheme</p>
+            <h3 style="font-size:14.5px;" data-i18n="lead1_title">NSS Member</h3>
+            <p style="font-size:13px;" data-i18n="lead1_sub">National Service Scheme</p>
           </div>
           <div class="skill-card reveal" style="padding:22px 20px;">
             <div class="skill-icon" style="background:var(--slate-soft); color:var(--slate); width:38px; height:38px; font-size:14px;"><i class="fa-solid fa-hand-fist"></i></div>
-            <h3 style="font-size:14.5px;">Handball Captain</h3>
-            <p style="font-size:13px;">Instrumentation Department</p>
+            <h3 style="font-size:14.5px;" data-i18n="lead2_title">Handball Captain</h3>
+            <p style="font-size:13px;" data-i18n="lead2_sub">Instrumentation Department</p>
           </div>
           <div class="skill-card reveal" style="padding:22px 20px;">
             <div class="skill-icon" style="background:var(--mustard-soft); color:var(--mustard); width:38px; height:38px; font-size:14px;"><i class="fa-solid fa-newspaper"></i></div>
-            <h3 style="font-size:14.5px;">Newsletter Coordinator</h3>
-            <p style="font-size:13px;">Departmental Newsletter Committee</p>
+            <h3 style="font-size:14.5px;" data-i18n="lead3_title">Newsletter Coordinator</h3>
+            <p style="font-size:13px;" data-i18n="lead3_sub">Departmental Newsletter Committee</p>
           </div>
           <div class="skill-card reveal" style="padding:22px 20px;">
             <div class="skill-icon" style="background:var(--teal-soft); color:var(--teal); width:38px; height:38px; font-size:14px;"><i class="fa-solid fa-people-group"></i></div>
-            <h3 style="font-size:14.5px;">Class Representative</h3>
-            <p style="font-size:13px;">Link for 30+ students &amp; faculty</p>
+            <h3 style="font-size:14.5px;" data-i18n="lead4_title">Class Representative</h3>
+            <p style="font-size:13px;" data-i18n="lead4_sub">Link for 30+ students &amp; faculty</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== CONTACT SECTION (REFINED & SLEEK) ==================== -->
+    <!-- ==================== CONTACT ==================== -->
     <section id="contact">
       <div class="container">
         <div class="section-head reveal" style="max-width: 600px; margin: 0 auto 48px auto; text-align: center;">
-          <div class="eyebrow" style="justify-content: center;">Get in touch</div>
-          <h2>Let's connect &amp; build the future together</h2>
-          <p>Open to entry-level roles, internships, and conversations around industrial automation and control systems.</p>
+          <div class="eyebrow" style="justify-content: center;" data-i18n="contact_eyebrow">Get in touch</div>
+          <h2 data-i18n="contact_h2">Let's connect &amp; build the future together</h2>
+          <p data-i18n="contact_p">Open to entry-level roles, internships, and conversations around industrial automation and control systems.</p>
         </div>
 
+        <!-- EDIT HERE: CONTACT DETAILS (email, phone, LinkedIn). Change both the link (href) and the text shown. -->
         <div class="contact-cards-grid reveal">
+
           <a href="mailto:dewangsewane@gmail.com" class="contact-card-item">
             <div class="contact-icon-box"><i class="fa-solid fa-envelope"></i></div>
             <div class="contact-card-content">
-              <span class="card-label">Email Me</span>
+              <span class="card-label" data-i18n="contact1_label">Email Me</span>
               <span class="card-value">dewangsewane@gmail.com</span>
             </div>
           </a>
@@ -1098,7 +1017,7 @@
           <a href="tel:+919325539896" class="contact-card-item">
             <div class="contact-icon-box"><i class="fa-solid fa-phone"></i></div>
             <div class="contact-card-content">
-              <span class="card-label">Call / WhatsApp</span>
+              <span class="card-label" data-i18n="contact2_label">Call / WhatsApp</span>
               <span class="card-value">+91-9325539896</span>
             </div>
           </a>
@@ -1106,7 +1025,7 @@
           <a href="https://www.linkedin.com/in/dewang-sewane" target="_blank" rel="noopener" class="contact-card-item">
             <div class="contact-icon-box"><i class="fa-brands fa-linkedin-in"></i></div>
             <div class="contact-card-content">
-              <span class="card-label">LinkedIn Profile</span>
+              <span class="card-label" data-i18n="contact3_label">LinkedIn Profile</span>
               <span class="card-value">dewang-sewane</span>
             </div>
           </a>
@@ -1125,13 +1044,48 @@
           <a href="https://www.linkedin.com/in/dewang-sewane" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
           <a href="mailto:dewangsewane@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
         </div>
-        <div class="footer-meta">© 2026 Dewang Sewane. Built with care.</div>
+        <div class="footer-meta" data-i18n="footer_meta">© 2026 Dewang Sewane. Built with care.</div>
       </div>
     </div>
   </footer>
 
+  <!-- ==================== PROJECT MODAL ==================== -->
+  <div class="modal" id="projectModal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <div class="lightbox" id="lightbox"><img id="lightboxImg" alt=""></div>
+
   <!-- ==================== SCRIPTS ==================== -->
   <script>
+    /* ---------- Theme toggle ---------- */
+    const root = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+
+    function applyTheme(theme, save) {
+      root.setAttribute('data-theme', theme);
+      themeBtn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+      if (save) { try { localStorage.setItem('theme', theme); } catch (e) {} }
+    }
+    applyTheme(root.getAttribute('data-theme') || 'light', false);
+
+    themeBtn.addEventListener('click', () => {
+      applyTheme(root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark', true);
+    });
+
+    // Follow the system setting until the visitor picks a theme manually
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        let saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (err) {}
+        if (!saved) applyTheme(e.matches ? 'dark' : 'light', false);
+      });
+    }
+
+    /* ---------- Mobile nav ---------- */
     const menuToggle = document.getElementById('menuToggle');
     const mobileNav = document.getElementById('mobileNav');
     menuToggle.addEventListener('click', () => {
@@ -1147,6 +1101,7 @@
       });
     });
 
+    /* ---------- Scroll reveal ---------- */
     const revealEls = document.querySelectorAll('.reveal');
     const io = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -1154,6 +1109,501 @@
       });
     }, { threshold: 0.15 });
     revealEls.forEach(el => io.observe(el));
+
+    /* ---------- Missing-image fallback (keeps layout intact) ---------- */
+    document.querySelectorAll('.proj-thumb img').forEach(img => {
+      img.addEventListener('error', () => img.parentElement.classList.add('noimg'));
+    });
+
+    /* =====================================================================
+       PROJECTS  (content of the "View details" pop-up)
+       ---------------------------------------------------------------------
+       One block per project. The key ('wsn-bms', 'bottle-filling', ...) must
+       match the data-project="..." on the card's button in the PROJECTS section.
+
+       Fields you can edit in each project:
+         tag ........ small line on top        (type, semester, year)
+         title ...... big heading
+         sub ........ line under the title     (team, guide, tools)
+         summary .... one paragraph overview
+         points ..... bullet list: what you built / did (add or remove lines)
+         table ...... OPTIONAL. Delete the whole table block if you do not need it
+         tools ...... the chips at the bottom (tools and technologies)
+         gallery .... PROJECT CONTENT IMAGES AND VIDEOS: ['path or link', 'caption']
+                      Add as many pictures / videos as you like. Missing files are skipped.
+                      Videos are detected automatically:
+                        ['videos/demo.mp4', 'Caption']                        your own file (.mp4 .webm .mov)
+                        ['https://youtu.be/XXXXXXXXXXX', 'Caption']           YouTube
+                        ['https://drive.google.com/file/d/ID/view', 'Caption'] Google Drive (anyone with link)
+
+       NEW PROJECT DATA TEMPLATE (copy, paste after the last project, rename the key):
+
+       'my-key': {
+         tag: 'Project type · Month Year',
+         title: 'Project title',
+         sub: 'Tools or team info',
+         summary: 'One paragraph overview.',
+         points: [
+           'What you did, first point.',
+           'What you did, second point.'
+         ],
+         tools: ['Tool 1', 'Tool 2'],
+         gallery: [
+           ['images/my-project/photo-1.jpg', 'Caption for photo 1'],
+           ['images/my-project/photo-2.jpg', 'Caption for photo 2']
+         ]
+       },
+       ===================================================================== */
+    const PROJECTS = {
+
+      /* ---------------- Project 1: Major project ---------------- */
+      'wsn-bms': {
+        tag: 'Major Project · B.Tech 7th Semester · IN1706 · 2026–27',
+        title: 'WSN-Based Intelligent Building Automation Using PLC',
+        sub: 'Team of 3 · Guide: Prof. N.Y. Bedare · Dept. of Instrumentation, GCOE Amravati',
+        summary: 'A low-cost building automation prototype that links a wireless ESP32 sensor node to an industrial Siemens S7-1200 PLC. The ESP32 reads environmental and safety sensors and exposes them as a Modbus TCP server over Wi-Fi; the PLC acts as Modbus TCP client, processes the data, raises alarms, and drives a KTP700 HMI.',
+        points: [
+          'ESP32 node reads a DHT11 (temperature, humidity), an MQ-2 (smoke / combustible gas) and a flame sensor, refreshing every second.',
+          'ESP32 runs a Modbus TCP server on port 502 with a static IP, so the PLC always finds it at the same address.',
+          'S7-1200 CPU 1215C polls the node with MB_CLIENT instructions in TIA Portal V19, triggered by the 1 Hz clock memory bit, and stores results in data block DB2.',
+          'Raw values are converted and scaled in the PLC with CONV, DIV and NORM_X into °C, %RH and a smoke percentage.',
+          'Flame detection drives a PLC output alarm; gas/smoke, temperature and humidity are compared against thresholds for alarm and ventilation logic.',
+          'KTP700 Basic HMI (PROFINET) shows live bar graphs and numeric values for room temperature (16–50 °C), smoke (0–100, warning at 20, alarm at 80) and humidity (0–100 %RH).',
+          'A heartbeat register on the ESP32 increments every second, so the node and Wi-Fi link can be verified with any Modbus polling tool before connecting the PLC.'
+        ],
+        tableTitle: 'Modbus register map (PLC address = 40001 + offset)',
+        table: {
+          head: ['Offset', 'PLC address', 'Data', 'Scaling'],
+          rows: [
+            ['100', '40101', 'Temperature', '°C × 100  (2620 = 26.20 °C)'],
+            ['101', '40102', 'Smoke / gas', 'ADC 0–4095'],
+            ['103', '40104', 'Flame alarm', '1 = flame detected'],
+            ['109', '40110', 'Humidity', '%RH × 100  (6600 = 66.00 %RH)']
+          ]
+        },
+        tools: ['ESP32', 'Arduino IDE', 'modbus-esp8266', 'Adafruit DHT', 'Siemens S7-1200', 'TIA Portal V19', 'WinCC Basic', 'KTP700 Basic PN', 'Modbus TCP', 'PROFINET', 'Wi-Fi router'],
+
+        /* EDIT HERE: PROJECT CONTENT IMAGES (gallery inside the pop-up) */
+        gallery: [
+          ['WSN Archi.png','WSN Architecture'],
+          ['WSN complete setup .jpeg', 'Complete prototype on the Siemens PLC trainer'],
+          ['WSN HMI.jpeg', 'KTP700 HMI showing live temperature, smoke and humidity'],
+          ['WSN ESP node .jpeg', 'ESP32 sensor node with DHT11, MQ-2 and flame sensor'],
+          ['images/wsn-bms/router-network.jpg', 'Wi-Fi router connecting ESP32, PLC and HMI'],
+          ['images/wsn-bms/flowchart.png', 'System flow chart'],
+          ['images/wsn-bms/pin-diagram.png', 'Pin and terminal diagram'],
+          ['images/wsn-bms/ladder-logic.png', 'PLC ladder logic: MB_CLIENT, scaling and flame alarm'],
+
+          /* EDIT HERE: VIDEO. Put your file in a videos/ folder (or paste a YouTube / Google Drive link). */
+          ['videos/wsn-demo.mp4', 'Working demo: ESP32 node, PLC and HMI']
+        ]
+      },
+
+
+      /* ---------------- Project 2: Rotary bottle filling ---------------- */
+      'bottle-filling': {
+        tag: 'PLC Project',
+        title: 'PLC-Based Rotary Bottle Filling System Automation',
+        sub: 'Siemens TIA Portal · Ladder Logic',
+        summary: 'Automation of a rotary bottle filling process using PLC ladder logic, where indexing and filling operations are sequenced and synchronized through sensor feedback.',
+        points: [
+          'Developed PLC ladder logic in Siemens TIA Portal for automated rotary bottle filling, implementing sequential control of rotary indexing and filling operations.',
+          'Integrated sensors for bottle positioning, bottle presence detection and filling completion monitoring to enable synchronized automated operation.'
+        ],
+        tools: ['Siemens TIA Portal', 'Ladder Logic (LAD)', 'Sequential control', 'Position & presence sensors'],
+
+        /* EDIT HERE: PROJECT CONTENT IMAGES */
+        gallery: [
+          ['LD for RBF.png', 'Ladder logic Networ 1,2'],
+          ['network next LD RBF.png', 'Ladder logicnetwork 2,4'],
+
+          /* EDIT HERE: VIDEO */
+          ['videos/rotary-bottle-filling.mp4', 'Rotary bottle filling in operation']
+        ]
+      },
+
+
+      /* ---------------- Project 3: Minor project ---------------- */
+      'temp-transmitter': {
+        tag: 'Minor Project · Jan 2026 – May 2026',
+        title: 'Wireless Temperature Transmitter with IoT-Based Remote Monitoring',
+        sub: 'ESP32 · ESP-NOW · Blynk',
+        summary: 'A wireless thermocouple-based temperature transmitter that sends readings between ESP32 units using ESP-NOW and publishes them to a Blynk IoT dashboard for remote monitoring.',
+        points: [
+          'Wireless link between ESP32 units using ESP-NOW communication.',
+          'Blynk IoT dashboard for real-time remote monitoring of temperature.',
+          '16×2 I2C LCD for local display at the receiving end.'
+        ],
+        tools: ['ESP32', 'ESP-NOW', 'Thermocouple', 'Blynk IoT', '16×2 I2C LCD'],
+
+        /* EDIT HERE: PROJECT CONTENT IMAGES */
+        gallery: [
+          ['Wireless Temperature Monitoring System.png', 'Wireless temperature transmitter Architecture'],
+	  ['wireless temp transmitter.jpeg','Wireless temperature transmitter setup'],
+	  ['temp transmitter blyn.jpeg','Blyn O/P']
+
+        ]
+      },
+
+
+      /* ---------------- Project 4: Mini project ---------------- */
+      'liquid-level': {
+        tag: 'Mini Project · Mar 2025 – Apr 2025',
+        title: 'Non-Contact Liquid Level Monitoring System',
+        sub: 'Arduino Uno · HC-SR04',
+        summary: 'A non-contact water tank level monitoring system that tracks the water level in real time, replacing a manual inspection task.',
+        points: [
+          'HC-SR04 ultrasonic sensor measures the distance to the water surface without touching the liquid.',
+          'Arduino Uno processes the readings for real-time level tracking.'
+        ],
+        tools: ['Arduino Uno', 'HC-SR04 ultrasonic sensor'],
+
+        /* EDIT HERE: PROJECT CONTENT IMAGES */
+        gallery: [
+          ['HC-SR04 Water Tank Level Diagram.png', 'Liquid level monitoring setup']
+        ]
+      }
+    };
+
+    /* ---------- Modal ---------- */
+    const modal = document.getElementById('projectModal');
+    const modalContent = document.getElementById('modalContent');
+    const modalClose = document.getElementById('modalClose');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    let lastFocus = null;
+    let currentProjectKey = null;
+    let currentLang = 'en';
+
+    function esc(s) {
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    /* ---------- Gallery helpers (pictures + videos) ---------- */
+    const VIDEO_EXT = /\.(mp4|webm|ogv|ogg|mov|m4v)(\?.*)?$/i;
+
+    // Returns {type:'file'|'embed', src} for a video entry, or null for a picture
+    function videoInfo(url) {
+      let m;
+      if ((m = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([\w-]{11})/i))) {
+        return { type: 'embed', src: 'https://www.youtube.com/embed/' + m[1] + '?rel=0' };
+      }
+      if ((m = url.match(/drive\.google\.com\/file\/d\/([\w-]+)/i))) {
+        return { type: 'embed', src: 'https://drive.google.com/file/d/' + m[1] + '/preview' };
+      }
+      if ((m = url.match(/vimeo\.com\/(\d+)/i))) {
+        return { type: 'embed', src: 'https://player.vimeo.com/video/' + m[1] };
+      }
+      if (VIDEO_EXT.test(url)) return { type: 'file', src: url };
+      return null;
+    }
+
+    function figureHtml(g) {
+      const v = videoInfo(g[0]);
+      const cap = '<figcaption>' + esc(g[1]) + '</figcaption>';
+      if (!v) {
+        return '<figure><div class="ph"><img src="' + esc(g[0]) + '" alt="' + esc(g[1]) + '" loading="lazy"></div>' + cap + '</figure>';
+      }
+      const media = v.type === 'file'
+        ? '<video src="' + esc(v.src) + '" controls playsinline preload="metadata" aria-label="' + esc(g[1]) + '"></video>'
+        : '<iframe src="' + esc(v.src) + '" title="' + esc(g[1]) + '" loading="lazy" allow="accelerometer; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+      return '<figure class="video"><div class="ph">' + media + '</div>' + cap + '</figure>';
+    }
+
+    // Current language version of a project (falls back to English for any missing field)
+    function localizedProject(key) {
+      const base = PROJECTS[key];
+      const ja = (currentLang === 'ja' && PROJECTS_JA[key]) || null;
+      if (!ja) return base;
+      const p = Object.assign({}, base, ja);
+      p.gallery = base.gallery.map((g, i) => [g[0], (ja.captions && ja.captions[i]) || g[1]]);
+      return p;
+    }
+
+    function renderProject(p) {
+      const L = UI[currentLang] || UI.en;
+      let html = '<span class="tag">' + esc(p.tag) + '</span>' +
+                 '<h3 id="modalTitle">' + esc(p.title) + '</h3>' +
+                 '<div class="sub">' + esc(p.sub) + '</div>' +
+                 '<p>' + esc(p.summary) + '</p>';
+
+      html += '<h4>' + L.keyPoints + '</h4><ul class="points">' + p.points.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>';
+
+      if (p.table) {
+        html += '<h4>' + esc(p.tableTitle) + '</h4><div class="table-wrap"><table><thead><tr>' +
+                p.table.head.map(x => '<th>' + esc(x) + '</th>').join('') + '</tr></thead><tbody>' +
+                p.table.rows.map(r => '<tr>' + r.map(c => '<td>' + esc(c) + '</td>').join('') + '</tr>').join('') +
+                '</tbody></table></div>';
+      }
+
+      html += '<h4>' + L.tools + '</h4><div class="chips">' + p.tools.map(t => '<span class="chip">' + esc(t) + '</span>').join('') + '</div>';
+
+      if (p.gallery && p.gallery.length) {
+        const pics = p.gallery.filter(g => !videoInfo(g[0]));
+        const vids = p.gallery.filter(g => videoInfo(g[0]));
+        html += '<h4 data-gallery="1">' + L.gallery + '</h4>';
+        if (pics.length) html += '<div class="gallery">' + pics.map(figureHtml).join('') + '</div>';
+        if (vids.length) html += '<div class="gallery gallery-video">' + vids.map(figureHtml).join('') + '</div>';
+      }
+      return html;
+    }
+
+    // Remove empty gallery rows / heading after a missing file is dropped
+    function tidyGallery() {
+      modalContent.querySelectorAll('.gallery').forEach(g => { if (!g.querySelector('figure')) g.remove(); });
+      if (!modalContent.querySelector('.gallery')) {
+        const hd = modalContent.querySelector('h4[data-gallery]');
+        if (hd) hd.remove();
+      }
+    }
+
+    function fillModal(key) {
+      modalContent.innerHTML = renderProject(localizedProject(key));
+      modalContent.querySelectorAll('.gallery img').forEach(img => {
+        img.addEventListener('error', () => { const f = img.closest('figure'); if (f) f.remove(); tidyGallery(); });
+        img.addEventListener('click', () => { lightboxImg.src = img.src; lightboxImg.alt = img.alt; lightbox.classList.add('open'); });
+      });
+      // A video file that is missing or cannot play is skipped too
+      modalContent.querySelectorAll('.gallery video').forEach(v => {
+        v.addEventListener('error', () => { const f = v.closest('figure'); if (f) f.remove(); tidyGallery(); });
+      });
+    }
+
+    function openProject(key) {
+      const p = PROJECTS[key];
+      if (!p) return;
+      lastFocus = document.activeElement;
+      currentProjectKey = key;
+      fillModal(key);
+
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      modal.scrollTop = 0;
+      modalClose.focus();
+    }
+
+    function closeProject() {
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      currentProjectKey = null;
+      modalContent.innerHTML = '';   // also stops any playing video
+      if (lastFocus) lastFocus.focus();
+    }
+
+    document.querySelectorAll('[data-project]').forEach(btn => {
+      btn.addEventListener('click', () => openProject(btn.dataset.project));
+    });
+    modalClose.addEventListener('click', closeProject);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeProject(); });
+    lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      if (lightbox.classList.contains('open')) lightbox.classList.remove('open');
+      else if (modal.classList.contains('open')) closeProject();
+    });
+
+    /* =====================================================================
+       LANGUAGE  (EN / 日本語)
+       ---------------------------------------------------------------------
+       PROJECTS_JA ... Japanese text for the project pop-ups (same keys as PROJECTS).
+                       'captions' = picture / video captions in the same order as 'gallery'.
+       UI ............ small labels inside the pop-up.
+       translations .. every other text on the page (matches data-i18n="..." in the HTML).
+       ===================================================================== */
+    const UI = {
+      en: { keyPoints: 'Key points', tools: 'Tools &amp; technologies', gallery: 'Gallery' },
+      ja: { keyPoints: '主なポイント', tools: '使用ツール・技術', gallery: 'ギャラリー' }
+    };
+
+    const PROJECTS_JA = {
+      'wsn-bms': {
+        tag: '主要プロジェクト ・ B.Tech 第7セメスター ・ IN1706 ・ 2026–27',
+        title: 'PLCを用いたWSNベースのインテリジェントビルオートメーション',
+        sub: '3名チーム ・ 指導教員:Prof. N.Y. Bedare ・ GCOEアムラヴァティ校 計測工学科',
+        summary: 'ワイヤレスESP32センサーノードを産業用Siemens S7-1200 PLCに接続する、低コストのビルオートメーション試作機です。ESP32は環境センサーと安全センサーを読み取り、Wi-Fi上でModbus TCPサーバーとして公開します。PLCはModbus TCPクライアントとしてデータを処理し、警報を発報し、KTP700 HMIを駆動します。',
+        points: [
+          'ESP32ノードがDHT11(温度・湿度)、MQ-2(煙・可燃性ガス)、炎センサーを読み取り、1秒ごとに更新します。',
+          'ESP32は固定IPでポート502のModbus TCPサーバーを実行するため、PLCは常に同じアドレスでノードを見つけられます。',
+          'S7-1200 CPU 1215Cが、TIA Portal V19のMB_CLIENT命令で1 Hzクロックメモリビットをトリガーとしてノードをポーリングし、結果をデータブロックDB2に格納します。',
+          'PLC内でCONV、DIV、NORM_Xを用いて生データを変換・スケーリングし、°C、%RH、煙の割合にします。',
+          '炎検知はPLC出力の警報を駆動し、ガス/煙、温度、湿度はしきい値と比較して警報・換気ロジックに使用されます。',
+          'KTP700 Basic HMI(PROFINET)は、室温(16–50 °C)、煙(0–100、20で警告、80で警報)、湿度(0–100 %RH)のライブ棒グラフと数値を表示します。',
+          'ESP32のハートビートレジスタが毎秒インクリメントされるため、PLCを接続する前に、任意のModbusポーリングツールでノードとWi-Fiリンクを確認できます。'
+        ],
+        tableTitle: 'Modbusレジスタマップ(PLCアドレス = 40001 + オフセット)',
+        table: {
+          head: ['オフセット', 'PLCアドレス', 'データ', 'スケーリング'],
+          rows: [
+            ['100', '40101', '温度', '°C × 100(2620 = 26.20 °C)'],
+            ['101', '40102', '煙・ガス', 'ADC 0–4095'],
+            ['103', '40104', '炎警報', '1 = 炎を検知'],
+            ['109', '40110', '湿度', '%RH × 100(6600 = 66.00 %RH)']
+          ]
+        },
+        captions: [
+          'WSNアーキテクチャ',
+          'Siemens PLCトレーナー上の完成プロトタイプ',
+          'KTP700 HMIにライブ表示された温度・煙・湿度',
+          'DHT11、MQ-2、炎センサーを備えたESP32センサーノード',
+          'ESP32、PLC、HMIをつなぐWi-Fiルーター',
+          'システムフローチャート',
+          'ピン・端子図',
+          'PLCラダーロジック:MB_CLIENT、スケーリング、炎警報',
+          '動作デモ:ESP32ノード、PLC、HMI'
+        ]
+      },
+      'bottle-filling': {
+        tag: 'PLCプロジェクト',
+        title: 'PLCによる回転式ボトル充填システムの自動化',
+        sub: 'Siemens TIA Portal ・ ラダーロジック',
+        summary: 'PLCラダーロジックによる回転式ボトル充填プロセスの自動化。インデックス動作と充填動作を、センサーフィードバックによりシーケンス化・同期させています。',
+        points: [
+          'Siemens TIA Portalで自動回転式ボトル充填のPLCラダーロジックを開発し、回転インデックスと充填動作のシーケンス制御を実装。',
+          'ボトルの位置決め、ボトルの有無検知、充填完了監視のセンサーを統合し、同期した自動運転を実現。'
+        ],
+        captions: ['回転式ボトル充填のラダーロジック ネットワーク1、2', 'ラダーロジック ネットワーク2、4', '回転式ボトル充填システムの動作映像']
+      },
+      'temp-transmitter': {
+        tag: 'マイナープロジェクト ・ 2026年1月 – 2026年5月',
+        title: 'IoTリモート監視によるワイヤレス温度トランスミッター',
+        sub: 'ESP32 ・ ESP-NOW ・ Blynk',
+        summary: 'ESP-NOWを用いてESP32間で測定値を送信し、リモート監視のためBlynk IoTダッシュボードに公開する、熱電対式ワイヤレス温度トランスミッター。',
+        points: [
+          'ESP-NOW通信によるESP32ユニット間のワイヤレスリンク。',
+          '温度のリアルタイムリモート監視のためのBlynk IoTダッシュボード。',
+          '受信側でのローカル表示用16×2 I2C LCD。'
+        ],
+        captions: ['ワイヤレス温度トランスミッターのアーキテクチャ', 'ワイヤレス温度トランスミッターのセットアップ', 'Blynkの出力画面']
+      },
+      'liquid-level': {
+        tag: 'ミニプロジェクト ・ 2025年3月 – 2025年4月',
+        title: '非接触式液面監視システム',
+        sub: 'Arduino Uno ・ HC-SR04',
+        summary: '水タンクの水位をリアルタイムで追跡し、手動点検に代わる非接触式水位監視システム。',
+        points: [
+          'HC-SR04超音波センサーが、液体に触れずに水面までの距離を測定します。',
+          'Arduino Unoが測定値を処理してリアルタイムの水位を追跡します。'
+        ],
+        captions: ['液面監視システムのセットアップ']
+      }
+    };
+
+    const translations = {
+      en: {
+        pageTitle: "Dewang Sewane — Instrumentation Engineering Student",
+        pageDesc: "Portfolio of Dewang Sewane, a final-year instrumentation engineering student — DCS/PLC experience, IoT projects and internships."
+      },
+      ja: {
+        pageTitle: "デワン・セワネ — 計測工学専攻 学生",
+        pageDesc: "計測工学専攻の最終学年生、デワン・セワネのポートフォリオ — DCS/PLC経験、IoTプロジェクト、インターンシップ。",
+        subtitle: "計測工学",
+        nav_about: "概要", nav_experience: "経験", nav_skills: "スキル", nav_projects: "プロジェクト",
+        nav_vision: "将来のビジョン", nav_education: "学歴",
+        resume_btn: "履歴書", lets_talk: "お話ししましょう",
+        hero_h1: "こんにちは",
+        hero_eyebrow: "デワン・セワネです",
+        hero_lede: "Siemens PCS7 DCSの構成やSiemens S7-1200 PLC(TIA Portal)のプログラミングを実践してきた、計測工学専攻の最終学年生です。ESP32を用いたIoTワイヤレスセンサーネットワークとリアルタイムのリモートダッシュボードの構築経験もあります。この制御システムとIoTのバックグラウンドを、ビル自動化または産業オートメーションの分野で活かしたいと考えています。",
+        hero_btn1: "プロジェクトを見る", hero_btn2: "一緒に働きましょう",
+        exp_eyebrow: "職務経験", exp_h2: "インターンシップ・実地研修",
+        exp_p: "実際のDCS/PLCハードウェアでの実践経験。",
+        exp1_tag: "2026年7月 – 2026年8月",
+        exp1_title: "産業オートメーション研修生",
+        exp1_desc: "SIMATIC ManagerとCFCロジックを用いてPCS7 DCS研修キットを構成。TIA PortalによりSiemens S7-1200のPLCラダーロジックをプログラム。産業用センサーの設定方法を習得。",
+        exp1_link: "証明書を見る",
+        exp2_tag: "実地研修 ・ 5日間",
+        exp2_title: "PLC・VFDパネル組立",
+        exp2_desc: "PLCおよびVFDパネルの組立を見学・補助 — 配線、レイアウト、回路図の読解 — 上級技術者の指導のもとで実施。",
+        skills_eyebrow: "得意分野", skills_h2: "スキル",
+        skills_p: "DCS/PLC制御およびIoTベースの監視に関する授業、インターンシップ、プロジェクトでの経験。",
+        skill1_title: "DCS構成",
+        skill1_desc: "Siemens PCS7 DCSの実機経験。SIMATIC ManagerでCFC(連続機能チャート)を用いて制御ロジックを構成。",
+        skill2_title: "PLC・HMIプログラミング",
+        skill2_desc: "TIA PortalによるSiemens S7-1200およびS7-1500のラダーロジック — ビットロジック、タイマー、カウンター、Modbus TCP(MB_CLIENT)、KTP700 HMI画面。",
+        skill3_title: "センサーとトランスデューサ",
+        skill3_desc: "熱電対、超音波、DHT11、MQ-2ガス、炎センサーとのインターフェース。プロセス計装と信号調整。",
+        skill4_title: "IoTとワイヤレスネットワーク",
+        skill4_desc: "ESP32ワイヤレスセンサーノード、ESP-NOW、Wi-Fi経由のModbus TCP、Blynkによるリモートデータ可視化ライブダッシュボード。",
+        proj_eyebrow: "主な制作物", proj_h2: "プロジェクト",
+        proj_p: "PLCシーケンス制御から、産業用コントローラと連携するワイヤレスセンサーネットワークまで。",
+        badge_major: "主要プロジェクト",
+        p1_tag: "B.Tech 第7セメスター ・ IN1706 ・ 2026–27",
+        p1_title: "PLCを用いたWSNベースのインテリジェントビルオートメーション",
+        p1_desc: "ESP32ワイヤレスセンサーノードが温度、湿度、煙/ガス、炎を計測し、Wi-Fi上のModbus TCPでデータを提供します。Siemens S7-1200 PLCがMB_CLIENTでこれをポーリングし、値をスケーリングして警報・換気ロジックを実行し、KTP700 HMIにすべてをリアルタイム表示します。",
+        btn_full: "詳細をすべて見る", btn_details: "詳細を見る",
+        p2_tag: "PLCプロジェクト",
+        p2_title: "PLCによる回転式ボトル充填システムの自動化",
+        p2_desc: "Siemens TIA Portalのラダーロジックによる回転式ボトル充填の自動化。回転インデックスと充填のシーケンス制御を行い、ボトルの位置決め、有無検知、充填完了の監視にセンサーを使用。",
+        p3_tag: "マイナープロジェクト ・ 2026年1月 – 2026年5月",
+        p3_title: "IoTリモート監視によるワイヤレス温度トランスミッター",
+        p3_desc: "ESP32間のESP-NOW通信を用いた熱電対式ワイヤレス温度トランスミッター。Blynk IoTダッシュボードによるリアルタイムリモート監視と16×2 I2C LCD表示を搭載 — BMSの中核となるリモート監視機能。",
+        p4_tag: "ミニプロジェクト ・ 2025年3月 – 2025年4月",
+        p4_title: "非接触式液面監視システム",
+        p4_desc: "HC-SR04超音波センサーとArduino Unoを用いた非接触式水タンク水位監視。施設の水位をリアルタイムで追跡し、ビル自動化における設備監視に相当する手動点検作業を自動化。",
+        vis_eyebrow: "キャリアロードマップ", vis_h2: "今後の目標とキャリアビジョン",
+        vis1_title: "ビルオートメーションとスマートインフラ",
+        vis1_desc: "スマートビル管理システム(BMS)や再生可能エネルギー統合プロジェクトに貢献し、エネルギーの無駄を最小限に抑えた持続可能な自動化環境を構築する。",
+        vis2_title: "産業用IoTとSCADA統合",
+        vis2_desc: "堅牢なSCADAプラットフォームとクラウド接続エッジIoTセンサーを導入し、従来のOTと最新のITシステムを橋渡しして予知保全を最適化する。",
+        vis3_title: "産業オートメーションとDCS",
+        vis3_desc: "プラント、発電所、重工業施設向けの大規模分散制御システム(DCS)および安全計装システム(SIS)に関する専門知識を深める。",
+        edu_eyebrow: "学歴背景", edu_h2: "学歴",
+        edu1_title: "工学士(計測工学専攻)",
+        edu1_desc: "関連科目:センサーとトランスデューサ(IN1403)、プロセス制御(IN1601)、産業オートメーション(IN1502)。",
+        edu2_title: "高等中等教育修了証(12年生)",
+        edu3_title: "中等教育修了証(10年生)",
+        lead_eyebrow: "課外活動", lead_h2: "リーダーシップ・課外活動",
+        lead1_title: "NSSメンバー", lead1_sub: "国家奉仕制度",
+        lead2_title: "ハンドボール部主将", lead2_sub: "計測工学科",
+        lead3_title: "ニュースレター担当", lead3_sub: "学科ニュースレター委員会",
+        lead4_title: "クラス代表", lead4_sub: "30名以上の学生・教員をつなぐ窓口",
+        contact_eyebrow: "お問い合わせ", contact_h2: "つながり、共に未来を築きましょう",
+        contact_p: "エントリーレベルの職種、インターンシップ、産業オートメーションや制御システムに関する対話を歓迎します。",
+        contact1_label: "メールはこちら", contact2_label: "電話 / WhatsApp", contact3_label: "LinkedInプロフィール",
+        footer_meta: "© 2026 Dewang Sewane. 丁寧に制作。"
+      }
+    };
+
+    // English text is already in the HTML: remember it so switching back to EN restores it exactly.
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (translations.en[key] === undefined) translations.en[key] = el.textContent;
+    });
+
+    const langEnBtn = document.getElementById('langEnBtn');
+    const langJaBtn = document.getElementById('langJaBtn');
+    const pageTitleEl = document.getElementById('pageTitle');
+    const pageDescEl = document.getElementById('pageDesc');
+
+    function setLanguage(lang) {
+      currentLang = (lang === 'ja') ? 'ja' : 'en';
+      const dict = translations[currentLang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] !== undefined) el.textContent = dict[key];
+      });
+      if (dict.pageTitle) { document.title = dict.pageTitle; if (pageTitleEl) pageTitleEl.textContent = dict.pageTitle; }
+      if (dict.pageDesc && pageDescEl) pageDescEl.setAttribute('content', dict.pageDesc);
+
+      document.documentElement.lang = currentLang;
+      langEnBtn.classList.toggle('active', currentLang === 'en');
+      langJaBtn.classList.toggle('active', currentLang === 'ja');
+      try { localStorage.setItem('site-lang', currentLang); } catch (e) { /* storage unavailable */ }
+
+      // If a project pop-up is open, redraw it in the new language
+      if (currentProjectKey) { const top = modal.scrollTop; fillModal(currentProjectKey); modal.scrollTop = top; }
+    }
+
+    langEnBtn.addEventListener('click', () => setLanguage('en'));
+    langJaBtn.addEventListener('click', () => setLanguage('ja'));
+
+    let initialLang = 'en';
+    try {
+      const saved = localStorage.getItem('site-lang');
+      if (saved === 'en' || saved === 'ja') initialLang = saved;
+    } catch (e) { /* storage unavailable */ }
+    setLanguage(initialLang);
   </script>
 </body>
 </html>
